@@ -2,9 +2,9 @@ const usersModel = require('../models/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// This function creates a new author (new user)
+// This function creates a new user (new user)
 const register = (req, res) => {
-  const { userName, email, password, phoneNumber, verified, role } = req.body;
+  const { userName, email, password, phoneNumber, role } = req.body;
   const user = new usersModel({
     userName,
     email,
@@ -62,9 +62,9 @@ const login = (req, res) => {
         }
         const payload = {
           userId: result._id,
-          author: result.firstName,
+          userName: result.userName,
           role: result.role,
-          country: result.country,
+          verified: result.verified,
         };
 
         const options = {
