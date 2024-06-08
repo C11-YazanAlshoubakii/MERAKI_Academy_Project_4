@@ -1,6 +1,6 @@
 const serviceModel = require('../models/serviceSchema');
 
-// This function returns the articles
+// This function returns the services
 const getAllServices = (req, res) => {
   const userId = req.token.userId;
   serviceModel
@@ -31,6 +31,33 @@ const getAllServices = (req, res) => {
     });
 };
 
+//This function returns services by provider
+const getServicesByProvider = (req, res) => {
+  let providerId = req.query.provider;
+
+  serviceModel
+    .find({ serviceProvider: providerId })
+    .then((services) => {
+      if (!services.length) {
+        return res.status(404).json({
+          success: false,
+          message: `The author: ${providerId} has no articles`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `All the articles for the author: ${providerId}`,
+        services: services,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 // This function creates new service
 const createNewService = (req, res) => {
   const {
@@ -74,4 +101,5 @@ const createNewService = (req, res) => {
 module.exports = {
   createNewService,
   getAllServices,
+  getServicesByProvider,
 };
