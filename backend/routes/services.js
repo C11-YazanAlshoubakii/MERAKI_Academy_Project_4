@@ -1,6 +1,6 @@
 const express = require('express');
 
-// Import articles controllers
+// Import services controllers
 const {
   createNewService,
   getAllServices,
@@ -8,6 +8,8 @@ const {
   updateServiceById,
   deleteServiceById,
 } = require('../controllers/services');
+
+const { createNewComment } = require('./../controllers/comments');
 
 // Middleware
 const authentication = require('../middleware/authentication');
@@ -28,6 +30,14 @@ servicesRouter.post(
   authentication,
   authorization('CREATE_SERVICE'),
   createNewService
+);
+
+// Comments Routers
+servicesRouter.post(
+  '/:id/comments',
+  authentication,
+  authorization('CREATE_COMMENTS'),
+  createNewComment
 );
 
 module.exports = servicesRouter;

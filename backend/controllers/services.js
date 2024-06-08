@@ -1,24 +1,70 @@
 const serviceModel = require('../models/serviceSchema');
 
+// const commentModel = require('../models/commentSchema');
+
+// // This function create a comment
+// const createNewComment = (req, res) => {
+//   const { id } = req.params;
+//   const { comment } = req.body;
+
+//   const commenterId = req.token.userId;
+
+//   serviceModel
+//     .findById(id)
+//     .exec()
+//     .then((service) => {
+//       const newComment = new commentModel({
+//         comment,
+//         commenter: commenterId,
+//       });
+
+//       service.comments.push(newComment);
+
+//       newComment
+//         .save()
+//         .then(() => {
+//           res.status(201).json({
+//             success: true,
+//             message: 'Comment created',
+//             comment: newComment,
+//           });
+//         })
+//         .catch((err) => {
+//           res.status(500).json({
+//             success: false,
+//             message: 'Server Error',
+//             err: err.message,
+//           });
+//         });
+//     })
+//     .catch((error) => {
+//       res.status(500).json({
+//         success: false,
+//         message: 'Server Error',
+//         err: error.message,
+//       });
+//     });
+// };
+
 // This function returns the services
 const getAllServices = (req, res) => {
   const userId = req.token.userId;
   serviceModel
     .find()
-    // .populate('comments')
+    .populate('comments')
     .exec()
     .then((services) => {
       if (services.length) {
         res.status(200).json({
           success: true,
-          message: `All the services`,
+          message: `All the articles`,
           userId: userId,
           services: services,
         });
       } else {
         res.status(200).json({
           success: false,
-          message: `No Articles Yet`,
+          message: `No services Yet`,
         });
       }
     })
@@ -99,7 +145,6 @@ const createNewService = (req, res) => {
 };
 
 // This function update the service by id
-
 const updateServiceById = (req, res) => {
   const { id } = req.params;
   const {
