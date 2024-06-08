@@ -5,6 +5,7 @@ const {
   createNewService,
   getAllServices,
   getServicesByProvider,
+  updateServiceById,
 } = require('../controllers/services');
 
 // Middleware
@@ -16,6 +17,8 @@ const servicesRouter = express.Router();
 
 servicesRouter.get('/', authentication, getAllServices);
 servicesRouter.get('/search_1', getServicesByProvider);
+
+servicesRouter.put('/:id', updateServiceById);
 
 servicesRouter.post(
   '/',

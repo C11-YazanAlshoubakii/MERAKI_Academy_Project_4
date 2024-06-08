@@ -98,8 +98,48 @@ const createNewService = (req, res) => {
     });
 };
 
+// This function update the service by id
+const updateServiceById = (req, res) => {
+  const { id } = req.params;
+  const {
+    serviceTitle,
+    serviceDescription,
+    serviceCategory,
+    price,
+    estimatedTime,
+  } = req.body;
+
+  serviceModel
+    .findByIdAndUpdate(
+      id,
+      {
+        serviceTitle,
+        serviceDescription,
+        serviceCategory,
+        price,
+        estimatedTime,
+      },
+      { returnDocument: 'after' }
+    )
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: 'service updated',
+        service: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: 'Server Error',
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createNewService,
   getAllServices,
   getServicesByProvider,
+  updateServiceById,
 };
