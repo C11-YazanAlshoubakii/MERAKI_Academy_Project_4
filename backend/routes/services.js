@@ -6,6 +6,7 @@ const {
   getAllServices,
   getServicesByProvider,
   updateServiceById,
+  deleteServiceById,
 } = require('../controllers/services');
 
 // Middleware
@@ -19,6 +20,8 @@ servicesRouter.get('/', authentication, getAllServices);
 servicesRouter.get('/search_1', getServicesByProvider);
 
 servicesRouter.put('/:id', updateServiceById);
+
+servicesRouter.delete('/:id', deleteServiceById);
 
 servicesRouter.post(
   '/',

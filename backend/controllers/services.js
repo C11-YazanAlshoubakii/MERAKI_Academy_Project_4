@@ -99,6 +99,7 @@ const createNewService = (req, res) => {
 };
 
 // This function update the service by id
+
 const updateServiceById = (req, res) => {
   const { id } = req.params;
   const {
@@ -137,9 +138,30 @@ const updateServiceById = (req, res) => {
     });
 };
 
+// This function delete the service by id
+const deleteServiceById = (req, res) => {
+  const { id } = req.params;
+  serviceModel
+    .findByIdAndDelete(id)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: 'Service deleted ',
+      });
+    })
+    .catch((err) => {
+      res.json(500).json({
+        success: false,
+        message: 'Server Error',
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createNewService,
   getAllServices,
   getServicesByProvider,
   updateServiceById,
+  deleteServiceById,
 };
