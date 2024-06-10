@@ -4,14 +4,14 @@ const jwt = require('jsonwebtoken');
 
 // This function creates a new user (new user)
 const register = (req, res) => {
-  const { userName, email, password, phoneNumber, role } = req.body;
+  const { userName, email, password, phoneNumber } = req.body;
   const user = new usersModel({
     userName,
     email,
     password,
     phoneNumber,
     verified: false,
-    role,
+    role: '66649bc3dce070d9eed31953',
   });
 
   user
