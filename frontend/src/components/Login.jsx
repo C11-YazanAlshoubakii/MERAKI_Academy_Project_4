@@ -2,37 +2,29 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
-  const sendRegReq = (body) => {
+const Login = () => {
+  const loginFunction = (body) => {
     axios
-      .post('http://localhost:5000/users/register', body)
+      .post('http://localhost:5000/users/login', body)
       .then((res) => {
         console.log(res);
-        navigate('/Login');
+        navigate('/');
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   const navigate = useNavigate();
-  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
 
   const handleSubmit = () => {
-    sendRegReq({ userName, email, password, phone });
+    loginFunction({ email, password });
   };
   return (
-    <div className="register-box">
-      <h2>Register</h2>
-      <input
-        type="text"
-        placeholder="user Name"
-        onChange={(e) => {
-          setUserName(e.target.value);
-        }}
-      />
+    <div>
+      <h2>Login</h2>
       <input
         type="email"
         placeholder="Email"
@@ -47,16 +39,9 @@ const Register = () => {
           setPassword(e.target.value);
         }}
       />
-      <input
-        type="text"
-        placeholder="Phone"
-        onChange={(e) => {
-          setPhone(e.target.value);
-        }}
-      />
-      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={handleSubmit}>Login</button>
     </div>
   );
 };
 
-export default Register;
+export default Login;
