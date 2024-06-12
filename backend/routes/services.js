@@ -19,7 +19,7 @@ const authorization = require('../middleware/authorization');
 const servicesRouter = express.Router();
 
 servicesRouter.get('/', authentication, getAllServices);
-servicesRouter.get('/search_1', getServicesByProvider);
+servicesRouter.get('/search_1', authentication, getServicesByProvider);
 
 servicesRouter.put('/:id', updateServiceById);
 

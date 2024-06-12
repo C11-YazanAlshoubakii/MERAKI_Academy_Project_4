@@ -10,8 +10,8 @@ const Login = () => {
     axios
       .post('http://localhost:5000/users/login', body)
       .then((res) => {
-        setToken(res.data.token);
         localStorage.setItem('token', res.data.token);
+        setToken(res.data.token);
         setIsLoggedIn(true);
         navigate('/home');
       })

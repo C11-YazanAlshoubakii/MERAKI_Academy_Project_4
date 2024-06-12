@@ -1,19 +1,18 @@
 import axios from 'axios';
-import { useEffect, useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserData } from '../App';
 
-const Home = () => {
-  const { token, setUserId } = useContext(UserData);
-  const [services, setServices] = useState([]);
-
+const profile = () => {
+  const { userId, token } = useContext(UserData);
+  const [userServices, setUserServices] = useState([]);
   useEffect(() => {
     axios
-      .get('http://localhost:5000/services/', {
+      .get(`http://localhost:5000/services/search_1?provider=${userId}`, {
         headers: { authorization: token },
       })
       .then((res) => {
-        setUserId(res.data.userId);
-        setServices(res.data.services);
+        console.log(res.data);
+        setUserServices(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -22,8 +21,8 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Services</h1>
-      {services.map((e) => {
+      <h2>Profile</h2>
+      {userServices.map((e) => {
         return (
           <div key={e._id}>
             <h3>{e.serviceTitle}</h3>
@@ -38,4 +37,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default profile;
