@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserData } from '../App';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const { setToken, setIsLoggedIn } = useContext(UserData);
+
   const loginFunction = (body) => {
     axios
       .post('http://localhost:5000/users/login', body)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.token);
+        setToken(res.data.token);
+        localStorage.setItem('token', res.data.token);
+        setIsLoggedIn(true);
         navigate('/');
       })
       .catch((err) => {
