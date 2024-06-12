@@ -12,13 +12,13 @@ const Home = () => {
         headers: { authorization: token },
       })
       .then((res) => {
-        // console.log(res.data.services);
         setServices(res.data.services);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [services]);
+    return () => {};
+  });
 
   return (
     <div>
