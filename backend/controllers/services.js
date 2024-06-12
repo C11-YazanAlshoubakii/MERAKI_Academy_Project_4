@@ -52,6 +52,7 @@ const getAllServices = (req, res) => {
   serviceModel
     .find()
     .populate('comments')
+    .populate('serviceProvider')
     .exec()
     .then((services) => {
       if (services.length) {

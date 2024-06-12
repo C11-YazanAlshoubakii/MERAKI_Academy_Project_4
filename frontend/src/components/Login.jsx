@@ -10,11 +10,10 @@ const Login = () => {
     axios
       .post('http://localhost:5000/users/login', body)
       .then((res) => {
-        console.log(res.data.token);
         setToken(res.data.token);
         localStorage.setItem('token', res.data.token);
         setIsLoggedIn(true);
-        navigate('/');
+        navigate('/home');
       })
       .catch((err) => {
         console.log(err);

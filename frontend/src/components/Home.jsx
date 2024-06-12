@@ -3,7 +3,7 @@ import { useEffect, useContext, useState } from 'react';
 import { UserData } from '../App';
 
 const Home = () => {
-  const { token, isLoggedIn } = useContext(UserData);
+  const { token } = useContext(UserData);
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -12,24 +12,26 @@ const Home = () => {
         headers: { authorization: token },
       })
       .then((res) => {
-        console.log(res.data.services);
+        // console.log(res.data.services);
         setServices(res.data.services);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, [services]);
+
   return (
     <div>
       <h1>Services</h1>
       {services.map((e) => {
         return (
-          <>
+          <div key={e._id}>
             <h3>{e.serviceTitle}</h3>
             <p>{e.serviceDescription}</p>
             <span>{e.price}</span>
             <span>{e.estimatedTime}</span>
-          </>
+            <p>{e.serviceProvider.userName}</p>
+          </div>
         );
       })}
     </div>
