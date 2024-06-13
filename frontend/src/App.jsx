@@ -4,7 +4,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Error from './components/NotFound';
 import Home from './components/Home';
-import Profile from './components/profile';
+import Profile from './components/Profile';
 import Nav from './components/Nav';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -30,6 +30,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
