@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import Register from './components/Register';
+import Register from './components/Register/Register';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Error from './components/NotFound';
