@@ -11,13 +11,17 @@ const NavBarComponent = () => {
   const { isLoggedIn } = useContext(UserData);
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" key={false}>
       <Container>
-        <Navbar.Brand href="/home">
+        <Navbar.Brand
+          onClick={() => {
+            navigator('/home');
+          }}
+        >
           <img
             src="/logo.jpeg"
             alt="logo"
-            style={{ width: '4rem', height: '4rem' }}
+            style={{ width: '4rem', height: '4rem', cursor: 'pointer' }}
           />
         </Navbar.Brand>
 
@@ -58,7 +62,12 @@ const NavBarComponent = () => {
             >
               Register
             </Button>
-            <Button variant="link" href="/login">
+            <Button
+              variant="link"
+              onClick={() => {
+                navigator('/login');
+              }}
+            >
               Login
             </Button>
           </Nav>
