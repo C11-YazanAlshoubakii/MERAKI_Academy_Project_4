@@ -5,8 +5,10 @@ import Logout from './components/Logout';
 import Error from './components/NotFound';
 import Home from './components/Home';
 import Profile from './components/Profile';
-import Nav from './components/Nav';
+import NavBarComponent from './components/Nav/NavBarComponent';
 import { Routes, Route } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 export const UserData = createContext();
@@ -27,7 +29,7 @@ function App() {
           setUserId,
         }}
       >
-        <Nav />
+        <NavBarComponent />
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />

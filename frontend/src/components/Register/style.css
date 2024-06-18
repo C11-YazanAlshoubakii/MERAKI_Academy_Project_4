@@ -46,20 +46,20 @@
   height: 100%;
 }
 
-.form-control {
+.form-control-box {
   margin-bottom: 10px;
   padding-bottom: 20px;
   position: relative;
   width: 100%;
 }
 
-.form-control label {
+.form-control-box label {
   color: #777;
   display: block;
   margin-bottom: 5px;
 }
 
-.form-control input {
+.form-control-box input {
   border: 1px solid #f0f0f0;
   border-radius: 4px;
   display: block;
@@ -68,20 +68,20 @@
   font-size: 1.5rem;
 }
 
-.form-control input:focus {
+.form-control-box input:focus {
   outline: 0;
   border-color: #777;
 }
 
-.form-control.success input {
+.form-control-box.success input {
   border-color: var(--success-color);
 }
 
-.form-control.error input {
+.form-control-box.error input {
   border-color: var(--error-color);
 }
 
-.form-control small {
+.form-control-box small {
   color: var(--error-color);
   display: block;
   position: absolute;
@@ -90,7 +90,7 @@
   visibility: hidden;
 }
 
-.form-control.error small {
+.form-control-box.error small {
   visibility: visible;
 }
 

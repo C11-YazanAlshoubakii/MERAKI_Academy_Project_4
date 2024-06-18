@@ -29,7 +29,7 @@ const Register = () => {
   // Show error message
   function showError(input, message) {
     const formControl = input.parentElement;
-    formControl.className = 'form-control error';
+    formControl.className = 'form-control-box error';
     const small = formControl.querySelector('small');
     small.innerText = message;
   }
@@ -37,7 +37,7 @@ const Register = () => {
   // show success outline
   function showSuccess(input) {
     const formControl = input.parentElement;
-    formControl.className = 'form-control success';
+    formControl.className = 'form-control-box success';
   }
 
   function checkRequired(input) {
@@ -84,7 +84,7 @@ const Register = () => {
           <img src="/logo.jpeg" className="img" alt="logo" />
         </div>
         <div className="register-box">
-          <div className="form-control">
+          <div className="form-control-box">
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -98,7 +98,7 @@ const Register = () => {
             />
             <small>Error message</small>
           </div>
-          <div className="form-control">
+          <div className="form-control-box">
             <label htmlFor="email">Email</label>
             <input
               type="text"
@@ -119,7 +119,7 @@ const Register = () => {
             <small>Error message</small>
           </div>
 
-          <div className="form-control">
+          <div className="form-control-box">
             <label htmlFor="phone">Phone</label>
             <input
               type="text"
@@ -134,7 +134,7 @@ const Register = () => {
             <small>Error message</small>
           </div>
 
-          <div className="form-control">
+          <div className="form-control-box">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -148,7 +148,7 @@ const Register = () => {
             <small>Error message</small>
           </div>
 
-          <div className="form-control">
+          <div className="form-control-box">
             <label htmlFor="password2">Confirm password</label>
             <input
               type="password"
