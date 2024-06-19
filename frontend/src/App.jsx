@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Logout from './components/Logout';
-import Error from './components/NotFound';
+import Error from './components/NotFound/NotFound';
 import Home from './components/Home/Home';
 import Profile from './components/Profile';
 import NavBarComponent from './components/Nav/NavBarComponent';
