@@ -21,8 +21,7 @@ const Home = () => {
         setUserId(res.data.userId);
         setServices(res.data.services);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         navigator('/login');
       });
   }, []);

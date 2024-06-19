@@ -5,7 +5,7 @@ import Login from './components/Login/Login';
 import Logout from './components/Logout';
 import Error from './components/NotFound/NotFound';
 import Home from './components/Home/Home';
-import Profile from './components/Profile';
+import Profile from './components/Profile/Profile';
 import NavBarComponent from './components/Nav/NavBarComponent';
 
 import 'bootstrap/dist/js/bootstrap.js';
@@ -17,6 +17,7 @@ function App() {
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
 
   return (
     <>
@@ -28,6 +29,8 @@ function App() {
           setIsLoggedIn,
           userId,
           setUserId,
+          userName,
+          setUserName,
         }}
       >
         <NavBarComponent />

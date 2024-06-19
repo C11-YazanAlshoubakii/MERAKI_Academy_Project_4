@@ -5,10 +5,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 
 const NavBarComponent = () => {
   const navigator = useNavigate();
-  const { isLoggedIn } = useContext(UserData);
+  const { isLoggedIn, userName } = useContext(UserData);
 
   return (
     <Navbar bg="dark" variant="dark" key={false}>
@@ -26,7 +27,7 @@ const NavBarComponent = () => {
         </Navbar.Brand>
 
         {isLoggedIn ? (
-          <Nav className="me-auto">
+          <Nav className="me-auto" style={{ position: 'relative' }}>
             <Button
               variant="link"
               onClick={() => {
@@ -51,6 +52,10 @@ const NavBarComponent = () => {
             >
               Logout
             </Button>
+
+            <h3>
+              <Badge bg="primary">{userName}</Badge>
+            </h3>
           </Nav>
         ) : (
           <Nav className="me-auto">

@@ -4,13 +4,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const { setToken, setIsLoggedIn } = useContext(UserData);
+  const { setToken, setIsLoggedIn, setUserName } = useContext(UserData);
 
   const loginFunction = (body) => {
     axios
       .post('http://localhost:5000/users/login', body)
       .then((res) => {
         localStorage.setItem('token', res.data.token);
+        // localStorage.setItem('userName', res.data.userName);
+        setUserName(res.data.user);
         setToken(res.data.token);
         setIsLoggedIn(true);
         navigate('/home');

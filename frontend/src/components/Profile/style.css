@@ -1,0 +1,9 @@
+.profile-container {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-content: center;
+  justify-items: center;
+}
