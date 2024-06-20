@@ -1,19 +1,20 @@
 import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserData } from '../../App';
+import AddService from './AddService';
 import './style.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Accordion from 'react-bootstrap/Accordion';
 
 const Profile = () => {
-  const { userId, token } = useContext(UserData);
-  const [userServices, setUserServices] = useState([]);
+  const { userId, token, userServices, setUserServices } = useContext(UserData);
 
   const NoServices = () => {
     return (
-      <div className="profile-container">
+      <>
         <h2 className="profile-title">You Dont have any Services!!</h2>
-      </div>
+      </>
     );
   };
 
@@ -44,6 +45,18 @@ const Profile = () => {
   return (
     <div>
       <h2 className="profile-title">Profile</h2>
+      <div className="addService">
+        {
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Add Service</Accordion.Header>
+              <Accordion.Body>
+                <AddService />
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        }
+      </div>
       <div className="profile-container">
         {userServices.length === 0 ? (
           <NoServices />

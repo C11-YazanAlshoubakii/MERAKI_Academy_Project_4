@@ -7,3 +7,14 @@
   align-content: center;
   justify-items: center;
 }
+
+.profile-title {
+  text-align: center;
+  grid-column: 2 / 3;
+}
+
+.addService {
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
