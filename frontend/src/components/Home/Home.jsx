@@ -9,21 +9,25 @@ import './style.css';
 
 const Home = () => {
   const navigator = useNavigate();
-  const { token, setUserId } = useContext(UserData);
+  const { token, setUserId, isLoggedIn } = useContext(UserData);
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:5000/services/', {
-        headers: { authorization: token },
-      })
-      .then((res) => {
-        setUserId(res.data.userId);
-        setServices(res.data.services);
-      })
-      .catch(() => {
-        navigator('/login');
-      });
+    {
+      isLoggedIn
+        ? axios
+            .get('http://localhost:5000/services/', {
+              headers: { authorization: token },
+            })
+            .then((res) => {
+              setUserId(res.data.userId);
+              setServices(res.data.services);
+            })
+            .catch((err) => {
+              navigator('/login');
+            })
+        : navigator('/login');
+    }
   }, []);
 
   return (
