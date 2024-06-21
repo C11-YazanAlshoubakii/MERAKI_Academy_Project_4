@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserData } from '../../App';
+import './style.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -27,36 +28,39 @@ const NavBarComponent = () => {
         </Navbar.Brand>
 
         {isLoggedIn ? (
-          <Nav className="me-auto" style={{ position: 'relative' }}>
-            <Button
-              variant="link"
-              onClick={() => {
-                navigator('/home');
-              }}
-            >
-              Home
-            </Button>
-            <Button
-              variant="link"
-              onClick={() => {
-                navigator('/profile');
-              }}
-            >
-              Profile
-            </Button>
-            <Button
-              variant="link"
-              onClick={() => {
-                navigator('/logout');
-              }}
-            >
-              Logout
-            </Button>
-
-            <h3>
-              <Badge bg="primary">{userName}</Badge>
-            </h3>
-          </Nav>
+          <>
+            <Nav className="me-auto" style={{ position: 'relative' }}>
+              <Button
+                variant="link"
+                onClick={() => {
+                  navigator('/home');
+                }}
+              >
+                Home
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => {
+                  navigator('/profile');
+                }}
+              >
+                Profile
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => {
+                  navigator('/logout');
+                }}
+              >
+                Logout
+              </Button>
+            </Nav>
+            <Nav className="user-badge">
+              <h3>
+                <Badge bg="primary">{userName}</Badge>
+              </h3>
+            </Nav>
+          </>
         ) : (
           <Nav className="me-auto">
             <Button
