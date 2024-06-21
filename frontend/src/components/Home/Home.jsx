@@ -5,14 +5,34 @@ import { UserData } from '../../App';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
-
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import './style.css';
-import CardBody from 'react-bootstrap/esm/CardBody';
 
 const Home = () => {
   const navigator = useNavigate();
-  const { token, setUserId, isLoggedIn } = useContext(UserData);
+  const { token, userId, setUserId, isLoggedIn } = useContext(UserData);
   const [services, setServices] = useState([]);
+  const [newComment, setNewComment] = useState('');
+
+  const addComment = (serviceId) => {
+    const comment = {
+      comment: newComment,
+      commenter: userId,
+    };
+    axios
+      .post(`http://localhost:5000/services/${serviceId}/comments`, comment, {
+        headers: { authorization: token },
+      })
+      .then((res) => {
+        setServices([...services]);
+        console.log(res);
+        setNewComment('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     {
@@ -38,7 +58,7 @@ const Home = () => {
       <div className="home-container">
         {services.map((e) => {
           return (
-            <Card style={{ width: '18rem' }} key={e._id}>
+            <Card style={{ width: '20rem' }} key={e._id}>
               <Card.Img variant="top" src="/logo.jpeg" />
               <Card.Body>
                 <Card.Title>{e.serviceTitle}</Card.Title>
@@ -53,10 +73,27 @@ const Home = () => {
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>Comments</Accordion.Header>
                     <Accordion.Body>
-                      {e.comments.map((e) => {
+                      <InputGroup className="mb-3">
+                        <Form.Control
+                          aria-label="Text input with button"
+                          placeholder="Enter Comment"
+                          onChange={(e) => {
+                            setNewComment(e.target.value);
+                          }}
+                        />
+                      </InputGroup>
+                      <Button
+                        style={{ width: '100%' }}
+                        onClick={() => {
+                          addComment(e._id);
+                        }}
+                      >
+                        Comment
+                      </Button>
+                      {e.comments.map((comment) => {
                         return (
-                          <div key={e._id}>
-                            <p>{e.comment}</p>
+                          <div key={comment._id}>
+                            <p>{comment.comment}</p>
                             <hr />
                           </div>
                         );
