@@ -1,14 +1,25 @@
 import axios from 'axios';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserData } from '../../App';
 import AddService from './AddService';
+import UpdateService from './UpdateService';
 import './style.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
+import Modal from 'react-bootstrap/Modal';
 
 const Profile = () => {
   const { userId, token, userServices, setUserServices } = useContext(UserData);
+
+  const [show, setShow] = useState(false);
+  const [service, setService] = useState(null);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (service) => {
+    setService(service);
+    setShow(true);
+  };
 
   const NoServices = () => {
     return (
@@ -70,7 +81,13 @@ const Profile = () => {
                   <Card.Text>{e.serviceDescription}</Card.Text>
                   <p>Price: {e.price}</p>
                   <p>estimatedTime: {e.estimatedTime}</p>
-                  <Button variant="primary" style={{ marginRight: '10px' }}>
+                  <Button
+                    variant="primary"
+                    style={{ marginRight: '10px' }}
+                    onClick={() => {
+                      handleShow(e);
+                    }}
+                  >
                     Edit
                   </Button>
                   <Button
@@ -90,6 +107,40 @@ const Profile = () => {
           })
         )}
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Service</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {service && (
+            <UpdateService
+              service={service}
+              token={token}
+              onUpdate={() => {
+                axios
+                  .get(
+                    `http://localhost:5000/services/search_1?provider=${userId}`,
+                    {
+                      headers: { authorization: token },
+                    }
+                  )
+                  .then((res) => {
+                    setUserServices(res.data.services);
+                    handleClose();
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                  });
+              }}
+            />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
