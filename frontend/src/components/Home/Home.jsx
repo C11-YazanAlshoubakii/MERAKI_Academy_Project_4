@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { UserData } from '../../App';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Accordion from 'react-bootstrap/Accordion';
 
 import './style.css';
+import CardBody from 'react-bootstrap/esm/CardBody';
 
 const Home = () => {
   const navigator = useNavigate();
@@ -23,7 +25,7 @@ const Home = () => {
               setUserId(res.data.userId);
               setServices(res.data.services);
             })
-            .catch((err) => {
+            .catch(() => {
               navigator('/login');
             })
         : navigator('/login');
@@ -45,6 +47,23 @@ const Home = () => {
                 <span>{e.estimatedTime}</span>
                 <p>{e.serviceProvider.userName}</p>
                 <Button variant="primary">Order</Button>
+              </Card.Body>
+              <Card.Body>
+                <Accordion>
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>Comments</Accordion.Header>
+                    <Accordion.Body>
+                      {e.comments.map((e) => {
+                        return (
+                          <div key={e._id}>
+                            <p>{e.comment}</p>
+                            <hr />
+                          </div>
+                        );
+                      })}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
               </Card.Body>
             </Card>
           );

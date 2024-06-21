@@ -6,7 +6,6 @@ import UpdateService from './UpdateService';
 import './style.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
 import Modal from 'react-bootstrap/Modal';
 
 const Profile = () => {
@@ -46,6 +45,20 @@ const Profile = () => {
       })
       .then((res) => {
         console.log(`Deleted post with ID ${res}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const onUpdate = () => {
+    axios
+      .get(`http://localhost:5000/services/search_1?provider=${userId}`, {
+        headers: { authorization: token },
+      })
+      .then((res) => {
+        setUserServices(res.data.services);
+        handelCloseUpdate();
       })
       .catch((err) => {
         console.error(err);
@@ -117,22 +130,7 @@ const Profile = () => {
             <UpdateService
               service={service}
               token={token}
-              onUpdate={() => {
-                axios
-                  .get(
-                    `http://localhost:5000/services/search_1?provider=${userId}`,
-                    {
-                      headers: { authorization: token },
-                    }
-                  )
-                  .then((res) => {
-                    setUserServices(res.data.services);
-                    handelCloseUpdate();
-                  })
-                  .catch((err) => {
-                    console.error(err);
-                  });
-              }}
+              onUpdate={onUpdate}
             />
           )}
         </Modal.Body>
