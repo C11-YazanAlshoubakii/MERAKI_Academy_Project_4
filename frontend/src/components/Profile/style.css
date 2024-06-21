@@ -18,3 +18,8 @@
   margin: 0 auto;
   margin-bottom: 30px;
 }
+
+.addService button {
+  margin: 0 auto;
+  display: block;
+}

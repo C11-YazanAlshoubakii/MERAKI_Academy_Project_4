@@ -3,7 +3,7 @@ import { UserData } from '../../App';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-function AddService() {
+function AddService({ close }) {
   const { token, setUserServices, userServices } = useContext(UserData);
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
@@ -24,6 +24,7 @@ function AddService() {
       .then((res) => {
         console.log(res, 'Done');
         setUserServices([...userServices, newService]);
+        close();
       })
       .catch((error) => {
         console.log(error);

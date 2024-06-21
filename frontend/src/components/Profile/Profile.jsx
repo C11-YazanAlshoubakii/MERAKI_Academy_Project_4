@@ -12,13 +12,23 @@ import Modal from 'react-bootstrap/Modal';
 const Profile = () => {
   const { userId, token, userServices, setUserServices } = useContext(UserData);
 
-  const [show, setShow] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
+
+  const [showAdd, setShowAdd] = useState(false);
   const [service, setService] = useState(null);
 
-  const handleClose = () => setShow(false);
-  const handleShow = (service) => {
+  const handelCloseUpdate = () => {
+    setShowUpdate(false);
+  };
+  const handelShowUpdate = (service) => {
     setService(service);
-    setShow(true);
+    setShowUpdate(true);
+  };
+  const handelCloseAdd = () => {
+    setShowAdd(false);
+  };
+  const handelShowAdd = () => {
+    setShowAdd(true);
   };
 
   const NoServices = () => {
@@ -57,16 +67,7 @@ const Profile = () => {
     <div>
       <h2 className="profile-title">Profile</h2>
       <div className="addService">
-        {
-          <Accordion>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Add Service</Accordion.Header>
-              <Accordion.Body>
-                <AddService />
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        }
+        {<Button onClick={handelShowAdd}>Add New Service</Button>}
       </div>
       <div className="profile-container">
         {userServices.length === 0 ? (
@@ -85,7 +86,7 @@ const Profile = () => {
                     variant="primary"
                     style={{ marginRight: '10px' }}
                     onClick={() => {
-                      handleShow(e);
+                      handelShowUpdate(e);
                     }}
                   >
                     Edit
@@ -107,7 +108,7 @@ const Profile = () => {
           })
         )}
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={showUpdate} onHide={handelCloseUpdate}>
         <Modal.Header closeButton>
           <Modal.Title>Update Service</Modal.Title>
         </Modal.Header>
@@ -126,7 +127,7 @@ const Profile = () => {
                   )
                   .then((res) => {
                     setUserServices(res.data.services);
-                    handleClose();
+                    handelCloseUpdate();
                   })
                   .catch((err) => {
                     console.error(err);
@@ -136,7 +137,21 @@ const Profile = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handelCloseUpdate}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Add Service Modal */}
+      <Modal show={showAdd} onHide={handelCloseAdd}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Service</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddService close={handelCloseAdd} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handelCloseAdd}>
             Close
           </Button>
         </Modal.Footer>
