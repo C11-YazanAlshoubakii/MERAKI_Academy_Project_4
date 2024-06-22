@@ -49,12 +49,12 @@ const getServicesByProvider = (req, res) => {
       if (!services.length) {
         return res.status(404).json({
           success: false,
-          message: `The author: ${providerId} has no articles`,
+          message: `The author: ${providerId} has no Services`,
         });
       }
       res.status(200).json({
         success: true,
-        message: `All the articles for the author: ${providerId}`,
+        message: `All the Services for the author: ${providerId}`,
         services: services,
       });
     })
