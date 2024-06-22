@@ -39,7 +39,7 @@ function App() {
         <NavBarComponent />
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />

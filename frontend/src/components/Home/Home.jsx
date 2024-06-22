@@ -93,7 +93,9 @@ const Home = () => {
                       {e.comments.map((comment) => {
                         return (
                           <div key={comment._id}>
-                            <p>{comment.comment}</p>
+                            <p>
+                              {comment.commenter.userName}:{comment.comment}
+                            </p>
                             <hr />
                           </div>
                         );

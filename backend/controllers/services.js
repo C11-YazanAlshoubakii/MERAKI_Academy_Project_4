@@ -51,7 +51,16 @@ const getAllServices = (req, res) => {
   const userId = req.token.userId;
   serviceModel
     .find()
-    .populate('comments')
+    // .populate('comments')
+    .populate({
+      path: 'comments',
+      populate: [
+        {
+          path: 'commenter',
+        },
+      ],
+    })
+
     .populate('serviceProvider')
     .exec()
     .then((services) => {
