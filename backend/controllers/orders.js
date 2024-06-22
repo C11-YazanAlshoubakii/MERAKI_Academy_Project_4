@@ -103,4 +103,37 @@ const getOrdersByProvider = (req, res) => {
     });
 };
 
-module.exports = { createNewOrder, getOrdersByProvider, getOrdersByUser };
+// This function update the Order by id
+const updateOrdersStatusById = (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  ordersModal
+    .findByIdAndUpdate(
+      id,
+      {
+        status,
+      },
+      { returnDocument: 'after' }
+    )
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: 'Order Status updated',
+        order: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: 'Server Error',
+        err: err.message,
+      });
+    });
+};
+module.exports = {
+  createNewOrder,
+  getOrdersByProvider,
+  getOrdersByUser,
+  updateOrdersStatusById,
+};

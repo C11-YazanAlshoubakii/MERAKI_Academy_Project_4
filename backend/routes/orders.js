@@ -5,6 +5,7 @@ const {
   createNewOrder,
   getOrdersByProvider,
   getOrdersByUser,
+  updateOrdersStatusById,
 } = require('../controllers/orders');
 
 // Middleware
@@ -16,6 +17,7 @@ const ordersRouter = express.Router();
 
 ordersRouter.get('/orders', authentication, getOrdersByProvider);
 ordersRouter.get('/orders_user', authentication, getOrdersByUser);
+ordersRouter.put('/:id', updateOrdersStatusById);
 
 ordersRouter.post(
   '/',

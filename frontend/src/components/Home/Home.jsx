@@ -64,9 +64,9 @@ const Home = () => {
               <Card.Body>
                 <Card.Title>{e.serviceTitle}</Card.Title>
                 <Card.Text>{e.serviceDescription}</Card.Text>
-                <span>{e.price}</span>
-                <span>{e.estimatedTime}</span>
-                <p>{e.serviceProvider.userName}</p>
+                <p>Price: {e.price}</p>
+                <p>Estimated Time: {e.estimatedTime}</p>
+                <p>Service Provider: {e.serviceProvider.userName}</p>
                 <Button variant="primary">Order</Button>
               </Card.Body>
               <Card.Body>
