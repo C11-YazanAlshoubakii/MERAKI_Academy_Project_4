@@ -103,7 +103,7 @@ const getOrdersByProvider = (req, res) => {
     });
 };
 
-// This function update the Order by id
+// This function update the Order Status by id
 const updateOrdersStatusById = (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -131,9 +131,39 @@ const updateOrdersStatusById = (req, res) => {
       });
     });
 };
+// This function update the Order Completed by id
+const updateOrdersCompletedById = (req, res) => {
+  const { id } = req.params;
+  const { completed } = req.body;
+
+  ordersModal
+    .findByIdAndUpdate(
+      id,
+      {
+        completed,
+      },
+      { returnDocument: 'after' }
+    )
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: 'Order completed updated',
+        order: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: 'Server Error',
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createNewOrder,
   getOrdersByProvider,
   getOrdersByUser,
   updateOrdersStatusById,
+  updateOrdersCompletedById,
 };
