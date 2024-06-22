@@ -40,7 +40,6 @@ const getOrdersByUser = (req, res) => {
     .populate('serviceId')
     .then((orders) => {
       if (!orders.length) {
-        console.log(orders);
         return res.status(404).json({
           success: false,
           message: `The author: ${userId} has no Orders`,
@@ -84,7 +83,6 @@ const getOrdersByProvider = (req, res) => {
 
     .then((orders) => {
       if (!orders.length) {
-        console.log(orders);
         return res.status(404).json({
           success: false,
           message: `The author: ${providerId} has no Orders`,
@@ -95,7 +93,6 @@ const getOrdersByProvider = (req, res) => {
         message: `All the Orders for the author: ${providerId}`,
         orders: orders,
       });
-      // console.log(orders[0].serviceId.serviceProvider.userName);
     })
     .catch((err) => {
       res.status(500).json({
