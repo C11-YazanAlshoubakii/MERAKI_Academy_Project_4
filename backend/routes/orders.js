@@ -4,6 +4,7 @@ const express = require('express');
 const {
   createNewOrder,
   getOrdersByProvider,
+  getOrdersByUser,
 } = require('../controllers/orders');
 
 // Middleware
@@ -14,6 +15,7 @@ const authorization = require('../middleware/authorization');
 const ordersRouter = express.Router();
 
 ordersRouter.get('/orders', authentication, getOrdersByProvider);
+ordersRouter.get('/orders_user', authentication, getOrdersByUser);
 
 ordersRouter.post(
   '/',

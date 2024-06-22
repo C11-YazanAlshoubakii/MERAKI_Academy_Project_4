@@ -31,6 +31,37 @@ const createNewOrder = (req, res) => {
     });
 };
 
+// Get Orders By User Id
+const getOrdersByUser = (req, res) => {
+  let userId = req.query.user;
+
+  ordersModal
+    .find({ userId: userId })
+    .populate('serviceId')
+    .then((orders) => {
+      if (!orders.length) {
+        console.log(orders);
+        return res.status(404).json({
+          success: false,
+          message: `The author: ${userId} has no Orders`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `All the Orders for the author: ${userId}`,
+        orders: orders,
+      });
+      console.log(orders);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
+
 // Get Orders By Provider Id
 const getOrdersByProvider = (req, res) => {
   let providerId = req.query.provider;
@@ -75,4 +106,4 @@ const getOrdersByProvider = (req, res) => {
     });
 };
 
-module.exports = { createNewOrder, getOrdersByProvider };
+module.exports = { createNewOrder, getOrdersByProvider, getOrdersByUser };
