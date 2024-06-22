@@ -15,6 +15,20 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const [newComment, setNewComment] = useState('');
 
+  const getServices = () => {
+    axios
+      .get('http://localhost:5000/services/', {
+        headers: { authorization: token },
+      })
+      .then((res) => {
+        setUserId(res.data.userId);
+        setServices(res.data.services);
+      })
+      .catch(() => {
+        navigator('/login');
+      });
+  };
+
   const addComment = (serviceId) => {
     const comment = {
       comment: newComment,
@@ -25,9 +39,8 @@ const Home = () => {
         headers: { authorization: token },
       })
       .then((res) => {
-        setServices([...services]);
         console.log(res);
-        setNewComment('');
+        getServices();
       })
       .catch((err) => {
         console.log(err);
@@ -36,19 +49,7 @@ const Home = () => {
 
   useEffect(() => {
     {
-      isLoggedIn
-        ? axios
-            .get('http://localhost:5000/services/', {
-              headers: { authorization: token },
-            })
-            .then((res) => {
-              setUserId(res.data.userId);
-              setServices(res.data.services);
-            })
-            .catch(() => {
-              navigator('/login');
-            })
-        : navigator('/login');
+      isLoggedIn ? getServices() : navigator('/login');
     }
   }, []);
 
@@ -90,11 +91,13 @@ const Home = () => {
                       >
                         Comment
                       </Button>
-                      {e.comments.map((comment) => {
+
+                      {/* {console.log(comments)} */}
+                      {e.comments.map((x) => {
                         return (
-                          <div key={comment._id}>
+                          <div key={x._id}>
                             <p>
-                              {comment.commenter.userName}:{comment.comment}
+                              {x.commenter.userName} : {x.comment}
                             </p>
                             <hr />
                           </div>
