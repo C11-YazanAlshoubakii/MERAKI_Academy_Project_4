@@ -37,7 +37,14 @@ const getOrdersByUser = (req, res) => {
 
   ordersModal
     .find({ userId: userId })
-    .populate('serviceId')
+    .populate({
+      path: 'serviceId',
+      populate: [
+        {
+          path: 'serviceProvider',
+        },
+      ],
+    })
     .then((orders) => {
       if (!orders.length) {
         return res.status(404).json({

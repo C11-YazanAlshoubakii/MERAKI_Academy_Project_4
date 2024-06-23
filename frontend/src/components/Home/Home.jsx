@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Comments from './Comments';
+import Orders from './Orders';
 import './style.css';
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
   const { token, setUserId, isLoggedIn } = useContext(UserData);
   const [services, setServices] = useState([]);
   const [showComments, setShowComments] = useState(false);
+  const [showOrders, setShowOrders] = useState(false);
   const [service, setService] = useState(null);
 
   const handelCloseComments = () => {
@@ -20,6 +22,12 @@ const Home = () => {
   };
   const handelShowComments = () => {
     setShowComments(true);
+  };
+  const handelCloseOrders = () => {
+    setShowOrders(false);
+  };
+  const handelShowOrders = () => {
+    setShowOrders(true);
   };
 
   const getServices = () => {
@@ -45,6 +53,15 @@ const Home = () => {
   return (
     <div>
       <h1 className="home-title">Our Services</h1>
+      <div style={{ textAlign: 'center' }}>
+        <Button
+          onClick={() => {
+            handelShowOrders();
+          }}
+        >
+          My Orders
+        </Button>
+      </div>
       <div className="home-container">
         {services.map((e) => {
           return (
@@ -88,6 +105,20 @@ const Home = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handelCloseComments}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Orders Modal */}
+      <Modal show={showOrders} onHide={handelCloseOrders}>
+        <Modal.Header closeButton>
+          <Modal.Title>Orders</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Orders />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handelCloseOrders}>
             Close
           </Button>
         </Modal.Footer>
