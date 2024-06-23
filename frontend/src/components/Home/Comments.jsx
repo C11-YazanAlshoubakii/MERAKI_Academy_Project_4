@@ -20,8 +20,7 @@ const Comments = ({ service, close, services }) => {
       .post(`http://localhost:5000/services/${serviceId}/comments`, comment, {
         headers: { authorization: token },
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         close();
         services();
       })
