@@ -14,9 +14,12 @@
 }
 
 .addService {
-  width: 50%;
+  width: 350px;
   margin: 0 auto;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .addService button {

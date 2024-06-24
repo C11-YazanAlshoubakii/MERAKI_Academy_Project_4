@@ -20,12 +20,15 @@ const Home = () => {
   const handelCloseComments = () => {
     setShowComments(false);
   };
+
   const handelShowComments = () => {
     setShowComments(true);
   };
+
   const handelCloseOrders = () => {
     setShowOrders(false);
   };
+
   const handelShowOrders = () => {
     setShowOrders(true);
   };

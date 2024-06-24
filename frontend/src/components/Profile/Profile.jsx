@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserData } from '../../App';
 import AddService from './AddService';
 import UpdateService from './UpdateService';
+import Orders from './Orders';
 import './style.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -12,7 +13,7 @@ const Profile = () => {
   const { userId, token, userServices, setUserServices } = useContext(UserData);
 
   const [showUpdate, setShowUpdate] = useState(false);
-
+  const [showOrders, setShowOrders] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [service, setService] = useState(null);
 
@@ -28,6 +29,13 @@ const Profile = () => {
   };
   const handelShowAdd = () => {
     setShowAdd(true);
+  };
+  const handelCloseOrders = () => {
+    setShowOrders(false);
+  };
+
+  const handelShowOrders = () => {
+    setShowOrders(true);
   };
 
   const NoServices = () => {
@@ -80,7 +88,14 @@ const Profile = () => {
     <div>
       <h2 className="profile-title">Profile</h2>
       <div className="addService">
-        {<Button onClick={handelShowAdd}>Add New Service</Button>}
+        <Button onClick={handelShowAdd}>Add New Service</Button>
+        <Button
+          onClick={() => {
+            handelShowOrders();
+          }}
+        >
+          My Orders
+        </Button>
       </div>
       <div className="profile-container">
         {userServices.length === 0 ? (
@@ -150,6 +165,20 @@ const Profile = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handelCloseAdd}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Orders Modal */}
+      <Modal show={showOrders} onHide={handelCloseOrders}>
+        <Modal.Header closeButton>
+          <Modal.Title>Orders</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Orders />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handelCloseOrders}>
             Close
           </Button>
         </Modal.Footer>

@@ -57,7 +57,6 @@ const getOrdersByUser = (req, res) => {
         message: `All the Orders for the author: ${userId}`,
         orders: orders,
       });
-      console.log(orders);
     })
     .catch((err) => {
       res.status(500).json({
@@ -70,46 +69,48 @@ const getOrdersByUser = (req, res) => {
 
 // Get Orders By Provider Id
 const getOrdersByProvider = (req, res) => {
-  let providerId = req.query.provider;
+  const providerId = req.query.provider;
 
   ordersModal
     .find()
     .populate({
       path: 'serviceId',
-      populate: [
-        {
-          path: 'serviceProvider',
-          populate: [
-            {
-              path: 'userName',
-            },
-          ],
-        },
-      ],
+      match: { serviceProvider: providerId },
+      populate: {
+        path: 'serviceProvider',
+      },
     })
-
+    .populate('userId')
     .then((orders) => {
+      // Filter out orders where serviceId did not match the providerId
+      orders = orders.filter(
+        (order) =>
+          order.serviceId &&
+          order.serviceId.serviceProvider &&
+          order.serviceId.serviceProvider._id.toString() === providerId
+      );
+
       if (!orders.length) {
+        console.log(`No orders found for provider: ${providerId}`);
         return res.status(404).json({
           success: false,
-          message: `The author: ${providerId} has no Orders`,
+          message: `The provider: ${providerId} has no orders`,
         });
       }
       res.status(200).json({
         success: true,
-        message: `All the Orders for the author: ${providerId}`,
+        message: `All the orders for the provider: ${providerId}`,
         orders: orders,
       });
     })
     .catch((err) => {
       res.status(500).json({
         success: false,
-        message: `Server Error`,
+        message: 'Server Error: Unable to retrieve orders',
         err: err.message,
       });
     });
 };
-
 // This function update the Order Status by id
 const updateOrdersStatusById = (req, res) => {
   const { id } = req.params;

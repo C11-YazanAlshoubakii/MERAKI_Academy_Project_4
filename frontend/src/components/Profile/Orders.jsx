@@ -9,7 +9,7 @@ const Orders = () => {
 
   const getOrders = (userId) => {
     axios
-      .get(`http://127.0.0.1:5000/orders/orders_user?user=${userId}`, {
+      .get(`http://127.0.0.1:5000/orders/orders?provider=${userId}`, {
         headers: { authorization: token },
       })
       .then((res) => {
@@ -33,21 +33,20 @@ const Orders = () => {
           <tr>
             <th>No.</th>
             <th>Service Title</th>
-            <th>Service Provider</th>
+            <th>User</th>
             <th>Status</th>
+            <th>Completed</th>
           </tr>
         </thead>
         <tbody>
           {order.map((e, i) => {
-            {
-              console.log(e);
-            }
             return (
               <tr key={e._id}>
                 <td>{i + 1}</td>
                 <td>{e.serviceId.serviceTitle}</td>
-                <td>{e.serviceId.serviceProvider.userName}</td>
+                <td>{e.userId.userName}</td>
                 <td>{e.status}</td>
+                <td>{e.completed + ''}</td>
               </tr>
             );
           })}
