@@ -25,7 +25,6 @@ const Orders = () => {
     const updatedOrder = {
       status: newStatus,
     };
-    console.log(newStatus);
 
     axios
       .put(`http://127.0.0.1:5000/orders/${id}`, updatedOrder, {
@@ -37,6 +36,12 @@ const Orders = () => {
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  const changeVariantClass = (status) => {
+    if (status === 'Pending') return 'warning';
+    if (status === 'Accepted') return 'success';
+    return 'danger';
   };
 
   useEffect(() => {
@@ -59,6 +64,7 @@ const Orders = () => {
         </thead>
         <tbody>
           {order.map((e, i) => {
+            const variantClass = changeVariantClass(e.status);
             return (
               <tr key={e._id}>
                 <td>{i + 1}</td>
@@ -67,13 +73,15 @@ const Orders = () => {
                 <td>
                   {
                     <Dropdown>
-                      <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      <Dropdown.Toggle
+                        variant={variantClass}
+                        id="dropdown-basic"
+                      >
                         {e.status}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu
                         onClick={(x) => {
-                          console.log(x.target.id);
                           const newStatus = x.target.id;
                           changeOrderStatus(e._id, newStatus);
                         }}
