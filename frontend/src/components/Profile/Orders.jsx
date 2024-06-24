@@ -1,10 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
 import { UserData } from '../../App';
+import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 
 const Orders = () => {
+  const navigator = useNavigate();
   const { token, userId, isLoggedIn } = useContext(UserData);
   const [order, setOrder] = useState([]);
 
@@ -18,6 +20,23 @@ const Orders = () => {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const changeOrderCompleted = (id, isCompleted) => {
+    const updatedOrder = {
+      completed: isCompleted,
+    };
+
+    axios
+      .put(`http://127.0.0.1:5000/orders/completed/${id}`, updatedOrder, {
+        headers: { authorization: token },
+      })
+      .then(() => {
+        getOrders(userId);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -93,7 +112,23 @@ const Orders = () => {
                     </Dropdown>
                   }
                 </td>
-                <td>{e.completed + ''}</td>
+                <td>
+                  <Dropdown>
+                    <Dropdown.Toggle variant={variantClass} id="dropdown-basic">
+                      {e.completed.toString()}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu
+                      onClick={(x) => {
+                        const isCompleted = x.target.id === 'true';
+                        changeOrderCompleted(e._id, isCompleted);
+                      }}
+                    >
+                      <Dropdown.Item id="true">True</Dropdown.Item>
+                      <Dropdown.Item id="false">False</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </td>
               </tr>
             );
           })}
