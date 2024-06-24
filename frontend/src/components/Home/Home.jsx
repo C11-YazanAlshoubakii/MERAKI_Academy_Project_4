@@ -53,8 +53,7 @@ const Home = () => {
       .post('http://127.0.0.1:5000/orders/', newOrder, {
         headers: { authorization: token },
       })
-      .then((res) => {
-        console.log(res, 'Order Done');
+      .then(() => {
         setSuccess(true);
       })
       .catch((error) => {

@@ -168,10 +168,32 @@ const updateOrdersCompletedById = (req, res) => {
     });
 };
 
+const deleteAllOrdersById = (req, res) => {
+  const { id } = req.params;
+  ordersModal
+    .deleteMany({
+      serviceId: id,
+    })
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: 'Orders deleted ',
+      });
+    })
+    .catch((err) => {
+      res.json(500).json({
+        success: false,
+        message: 'Server Error',
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createNewOrder,
   getOrdersByProvider,
   getOrdersByUser,
   updateOrdersStatusById,
   updateOrdersCompletedById,
+  deleteAllOrdersById,
 };

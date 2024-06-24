@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { UserData } from '../../App';
 import Table from 'react-bootstrap/Table';
+import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 
 const Orders = () => {
@@ -17,6 +18,24 @@ const Orders = () => {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const changeOrderStatus = (id, newStatus) => {
+    const updatedOrder = {
+      status: newStatus,
+    };
+    console.log(newStatus);
+
+    axios
+      .put(`http://127.0.0.1:5000/orders/${id}`, updatedOrder, {
+        headers: { authorization: token },
+      })
+      .then(() => {
+        getOrders(userId);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -45,7 +64,27 @@ const Orders = () => {
                 <td>{i + 1}</td>
                 <td>{e.serviceId.serviceTitle}</td>
                 <td>{e.userId.userName}</td>
-                <td>{e.status}</td>
+                <td>
+                  {
+                    <Dropdown>
+                      <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        {e.status}
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu
+                        onClick={(x) => {
+                          console.log(x.target.id);
+                          const newStatus = x.target.id;
+                          changeOrderStatus(e._id, newStatus);
+                        }}
+                      >
+                        <Dropdown.Item id="Pending">Pending</Dropdown.Item>
+                        <Dropdown.Item id="Accepted">Accepted</Dropdown.Item>
+                        <Dropdown.Item id="Declined">Declined</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  }
+                </td>
                 <td>{e.completed + ''}</td>
               </tr>
             );

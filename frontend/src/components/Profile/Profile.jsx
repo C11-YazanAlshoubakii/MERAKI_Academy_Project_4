@@ -52,7 +52,18 @@ const Profile = () => {
         headers: { authorization: token },
       })
       .then((res) => {
-        console.log(`Deleted post with ID ${res}`);
+        console.log(`Deleted Service with ID ${res}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    axios
+      .delete(`http://127.0.0.1:5000/orders/${id}`, {
+        headers: { authorization: token },
+      })
+      .then((res) => {
+        console.log(`Deleted All Orders with ID ${res}`);
       })
       .catch((err) => {
         console.error(err);
