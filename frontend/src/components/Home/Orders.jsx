@@ -39,9 +39,6 @@ const Orders = () => {
         </thead>
         <tbody>
           {order.map((e, i) => {
-            {
-              console.log(e);
-            }
             return (
               <tr key={e._id}>
                 <td>{i + 1}</td>

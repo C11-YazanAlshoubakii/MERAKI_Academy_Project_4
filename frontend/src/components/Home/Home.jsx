@@ -5,16 +5,18 @@ import { UserData } from '../../App';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
 import Comments from './Comments';
 import Orders from './Orders';
 import './style.css';
 
 const Home = () => {
   const navigator = useNavigate();
-  const { token, setUserId, isLoggedIn } = useContext(UserData);
+  const { token, setUserId, isLoggedIn, userId } = useContext(UserData);
   const [services, setServices] = useState([]);
   const [showComments, setShowComments] = useState(false);
   const [showOrders, setShowOrders] = useState(false);
+  const [showConfirmOrder, setShowConfirmOrder] = useState(false);
   const [service, setService] = useState(null);
 
   const handelCloseComments = () => {
@@ -31,6 +33,31 @@ const Home = () => {
 
   const handelShowOrders = () => {
     setShowOrders(true);
+  };
+
+  const handelCloseConfirmOrder = () => {
+    setShowConfirmOrder(false);
+  };
+
+  const handelShowConfirmOrder = () => {
+    setShowConfirmOrder(true);
+  };
+
+  const addOrder = (serviceId) => {
+    const newOrder = {
+      userId,
+      serviceId,
+    };
+    axios
+      .post('http://127.0.0.1:5000/orders/', newOrder, {
+        headers: { authorization: token },
+      })
+      .then((res) => {
+        console.log(res, 'Order Done');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const getServices = () => {
@@ -87,7 +114,14 @@ const Home = () => {
                 </Button>
               </Card.Body>
               <Card.Body>
-                <Button variant="primary" style={{ width: '100%' }}>
+                <Button
+                  variant="primary"
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    setService(e);
+                    handelShowConfirmOrder();
+                  }}
+                >
                   Order
                 </Button>
               </Card.Body>
@@ -122,6 +156,29 @@ const Home = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handelCloseOrders}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Confirm Order */}
+      <Modal show={showConfirmOrder} onHide={handelCloseConfirmOrder}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            Are You Sure you want to order this Service??
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Button
+            style={{ width: '100%' }}
+            onClick={() => {
+              addOrder(service._id);
+            }}
+          >
+            Order
+          </Button>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handelCloseConfirmOrder}>
             Close
           </Button>
         </Modal.Footer>
