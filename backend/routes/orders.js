@@ -8,6 +8,7 @@ const {
   updateOrdersStatusById,
   updateOrdersCompletedById,
   deleteAllOrdersById,
+  deleteOrderById,
 } = require('../controllers/orders');
 
 // Middleware
@@ -19,9 +20,12 @@ const ordersRouter = express.Router();
 
 ordersRouter.get('/orders', authentication, getOrdersByProvider);
 ordersRouter.get('/orders_user', authentication, getOrdersByUser);
+
 ordersRouter.put('/:id', updateOrdersStatusById);
 ordersRouter.put('/completed/:id', updateOrdersCompletedById);
+
 ordersRouter.delete('/:id', deleteAllOrdersById);
+ordersRouter.delete('/order/:id', deleteOrderById);
 
 ordersRouter.post(
   '/',

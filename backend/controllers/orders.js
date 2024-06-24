@@ -189,6 +189,25 @@ const deleteAllOrdersById = (req, res) => {
     });
 };
 
+const deleteOrderById = (req, res) => {
+  const { id } = req.params;
+  ordersModal
+    .findByIdAndDelete(id)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: 'Order Deleted',
+      });
+    })
+    .catch((err) => {
+      res.json(500).json({
+        success: false,
+        message: 'Server Error',
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createNewOrder,
   getOrdersByProvider,
@@ -196,4 +215,5 @@ module.exports = {
   updateOrdersStatusById,
   updateOrdersCompletedById,
   deleteAllOrdersById,
+  deleteOrderById,
 };

@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { UserData } from '../../App';
+import DeleteOrder from './DeleteOrder';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 
@@ -35,6 +36,7 @@ const Orders = () => {
             <th>Service Title</th>
             <th>Service Provider</th>
             <th>Status</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +47,13 @@ const Orders = () => {
                 <td>{e.serviceId.serviceTitle}</td>
                 <td>{e.serviceId.serviceProvider.userName}</td>
                 <td>{e.status}</td>
+                <td>
+                  {e.status !== 'Pending' ? (
+                    <DeleteOrder disabled={true} />
+                  ) : (
+                    <DeleteOrder id={e._id} onDelete={getOrders} />
+                  )}
+                </td>
               </tr>
             );
           })}

@@ -131,7 +131,8 @@ const Home = () => {
           );
         })}
       </div>
-      <Modal show={showComments} onHide={handelCloseComments}>
+      {/* Comments Mmodal */}
+      <Modal show={showComments} onHide={handelCloseComments} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Comments</Modal.Title>
         </Modal.Header>
@@ -149,7 +150,7 @@ const Home = () => {
         </Modal.Footer>
       </Modal>
       {/* Orders Modal */}
-      <Modal show={showOrders} onHide={handelCloseOrders}>
+      <Modal show={showOrders} onHide={handelCloseOrders} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Orders</Modal.Title>
         </Modal.Header>

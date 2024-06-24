@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { UserData } from '../../App';
+import { useNavigate } from 'react-router-dom';
 import AddService from './AddService';
 import UpdateService from './UpdateService';
 import Orders from './Orders';
@@ -10,7 +11,9 @@ import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 
 const Profile = () => {
-  const { userId, token, userServices, setUserServices } = useContext(UserData);
+  const navigator = useNavigate();
+  const { userId, token, userServices, setUserServices, isLoggedIn } =
+    useContext(UserData);
 
   const [showUpdate, setShowUpdate] = useState(false);
   const [showOrders, setShowOrders] = useState(false);
@@ -70,7 +73,7 @@ const Profile = () => {
       });
   };
 
-  const onUpdate = () => {
+  const getServices = () => {
     axios
       .get(`http://localhost:5000/services/search_1?provider=${userId}`, {
         headers: { authorization: token },
@@ -85,14 +88,9 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/services/search_1?provider=${userId}`, {
-        headers: { authorization: token },
-      })
-      .then((res) => {
-        setUserServices(res.data.services);
-      })
-      .catch(() => {});
+    {
+      isLoggedIn ? getServices(userId) : navigator('/login');
+    }
   }, []);
 
   return (
@@ -147,7 +145,7 @@ const Profile = () => {
           })
         )}
       </div>
-      <Modal show={showUpdate} onHide={handelCloseUpdate}>
+      <Modal show={showUpdate} onHide={handelCloseUpdate} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Update Service</Modal.Title>
         </Modal.Header>
@@ -156,7 +154,7 @@ const Profile = () => {
             <UpdateService
               service={service}
               token={token}
-              onUpdate={onUpdate}
+              onUpdate={getServices}
             />
           )}
         </Modal.Body>
@@ -167,7 +165,7 @@ const Profile = () => {
         </Modal.Footer>
       </Modal>
       {/* Add Service Modal */}
-      <Modal show={showAdd} onHide={handelCloseAdd}>
+      <Modal show={showAdd} onHide={handelCloseAdd} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Add New Service</Modal.Title>
         </Modal.Header>
@@ -181,7 +179,7 @@ const Profile = () => {
         </Modal.Footer>
       </Modal>
       {/* Orders Modal */}
-      <Modal show={showOrders} onHide={handelCloseOrders}>
+      <Modal show={showOrders} onHide={handelCloseOrders} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Orders</Modal.Title>
         </Modal.Header>
