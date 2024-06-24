@@ -38,6 +38,7 @@ const Home = () => {
 
   const handelCloseConfirmOrder = () => {
     setShowConfirmOrder(false);
+    setSuccess(false);
   };
 
   const handelShowConfirmOrder = () => {
