@@ -18,6 +18,7 @@ const Home = () => {
   const [showOrders, setShowOrders] = useState(false);
   const [showConfirmOrder, setShowConfirmOrder] = useState(false);
   const [service, setService] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handelCloseComments = () => {
     setShowComments(false);
@@ -54,6 +55,7 @@ const Home = () => {
       })
       .then((res) => {
         console.log(res, 'Order Done');
+        setSuccess(true);
       })
       .catch((error) => {
         console.log(error);
@@ -177,7 +179,8 @@ const Home = () => {
             Order
           </Button>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{ justifyContent: 'space-between' }}>
+          {success && <Alert variant="success">Order Added Successfully</Alert>}
           <Button variant="secondary" onClick={handelCloseConfirmOrder}>
             Close
           </Button>
