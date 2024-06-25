@@ -114,7 +114,7 @@ const Orders = () => {
                 </td>
                 <td>
                   <Dropdown>
-                    <Dropdown.Toggle variant={variantClass} id="dropdown-basic">
+                    <Dropdown.Toggle variant="info" id="dropdown-basic">
                       {e.completed.toString()}
                     </Dropdown.Toggle>
 

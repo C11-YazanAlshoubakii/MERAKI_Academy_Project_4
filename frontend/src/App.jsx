@@ -19,6 +19,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
   const [userServices, setUserServices] = useState([]);
+  const [title, setTitle] = useState('');
+  const [services, setServices] = useState([]);
 
   return (
     <>
@@ -34,6 +36,10 @@ function App() {
           setUserName,
           userServices,
           setUserServices,
+          title,
+          setTitle,
+          services,
+          setServices,
         }}
       >
         <NavBarComponent />

@@ -6,14 +6,24 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
+import Accordion from 'react-bootstrap/Accordion';
+import Form from 'react-bootstrap/Form';
 import Comments from './Comments';
 import Orders from './Orders';
 import './style.css';
 
 const Home = () => {
   const navigator = useNavigate();
-  const { token, setUserId, isLoggedIn, userId } = useContext(UserData);
-  const [services, setServices] = useState([]);
+  const {
+    token,
+    setUserId,
+    isLoggedIn,
+    userId,
+    services,
+    setServices,
+    title,
+    setTitle,
+  } = useContext(UserData);
   const [showComments, setShowComments] = useState(false);
   const [showOrders, setShowOrders] = useState(false);
   const [showConfirmOrder, setShowConfirmOrder] = useState(false);
@@ -76,16 +86,30 @@ const Home = () => {
       });
   };
 
+  const getSerivcesByTitle = () => {
+    if (title === '') {
+      getServices();
+      return;
+    }
+
+    const filteredByTitle = services.filter((item) => {
+      if (item.serviceTitle.toLowerCase().includes(title.toLowerCase())) {
+        return item;
+      }
+    });
+    setServices(filteredByTitle);
+  };
+
   useEffect(() => {
     {
       isLoggedIn ? getServices() : navigator('/login');
     }
-  }, []);
+  }, [title]);
 
   return (
     <div>
       <h1 className="home-title">Our Services</h1>
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
         <Button
           onClick={() => {
             handelShowOrders();
@@ -94,6 +118,27 @@ const Home = () => {
           My Orders
         </Button>
       </div>
+      <Accordion style={{ width: '70%', margin: '0 auto' }}>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Search</Accordion.Header>
+          <Accordion.Body>
+            <Form className="d-flex" style={{ marginRight: '20px' }}>
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                value={title}
+                className="me-2"
+                aria-label="Search"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+
+              <Button onClick={getSerivcesByTitle}>Search</Button>
+            </Form>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
       <div className="home-container">
         {services.map((e) => {
           return (

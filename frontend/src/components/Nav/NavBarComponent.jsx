@@ -57,7 +57,7 @@ const NavBarComponent = () => {
             </Nav>
             <Nav className="user-badge">
               <h3>
-                <Badge bg="info">{userName}</Badge>
+                <Badge bg="secondary">{userName}</Badge>
               </h3>
             </Nav>
           </>

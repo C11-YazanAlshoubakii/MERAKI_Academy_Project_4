@@ -66,6 +66,7 @@ const getServicesByProvider = (req, res) => {
       });
     });
 };
+
 // This function creates new service
 const createNewService = (req, res) => {
   const {
