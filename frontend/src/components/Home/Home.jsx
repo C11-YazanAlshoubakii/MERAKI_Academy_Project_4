@@ -144,18 +144,16 @@ const Home = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Search</Accordion.Header>
           <Accordion.Body>
-            <Form className="d-flex" style={{ marginRight: '20px' }}>
-              <Form.Control
-                type="search"
-                placeholder="Enter Service Title"
-                value={title}
-                className="me-2"
-                aria-label="Search"
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              />
-            </Form>
+            <Form.Control
+              type="text"
+              placeholder="Enter Service Title"
+              value={title}
+              className="me-2"
+              aria-label="Text"
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
