@@ -8,6 +8,7 @@ const services = new mongoose.Schema({
   serviceProvider: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   estimatedTime: { type: Number },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+  imageLink: { type: String },
 });
 
 module.exports = mongoose.model('Services', services);

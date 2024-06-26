@@ -75,6 +75,7 @@ const createNewService = (req, res) => {
     serviceCategory,
     price,
     estimatedTime,
+    imageLink,
   } = req.body;
 
   const serviceProvider = req.token.userId;
@@ -87,6 +88,7 @@ const createNewService = (req, res) => {
     serviceProvider,
     estimatedTime,
     comments: [],
+    imageLink,
   });
 
   newService
@@ -116,6 +118,7 @@ const updateServiceById = (req, res) => {
     serviceCategory,
     price,
     estimatedTime,
+    imageLink,
   } = req.body;
 
   serviceModel
@@ -127,6 +130,7 @@ const updateServiceById = (req, res) => {
         serviceCategory,
         price,
         estimatedTime,
+        imageLink,
       },
       { returnDocument: 'after' }
     )

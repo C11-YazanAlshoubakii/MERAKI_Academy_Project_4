@@ -111,9 +111,10 @@ const Profile = () => {
           <NoServices />
         ) : (
           userServices.map((e) => {
+            console.log(e.imageLink);
             return (
               <Card style={{ width: '20rem' }} key={e._id}>
-                <Card.Img variant="top" src="/logo.jpeg" />
+                <Card.Img variant="top" src={e.imageLink} />
                 <Card.Body>
                   <Card.Title>{e.serviceTitle}</Card.Title>
                   <Card.Text>{e.serviceDescription}</Card.Text>
