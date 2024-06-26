@@ -8,6 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
 import Comments from './Comments';
 import Orders from './Orders';
 import './style.css';
@@ -86,6 +87,23 @@ const Home = () => {
       });
   };
 
+  const filterServicesByPrice = () => {
+    const filteredByPrice = services.filter((item) => {
+      if (item.price <= 10) {
+        return item;
+      }
+    });
+    setServices(filteredByPrice);
+  };
+  const filterServicesByEstimatedTime = () => {
+    const filteredByEstimatedTime = services.filter((item) => {
+      if (item.estimatedTime <= 3) {
+        return item;
+      }
+    });
+    setServices(filteredByEstimatedTime);
+  };
+
   const getSerivcesByTitle = () => {
     if (title === '') {
       getServices();
@@ -125,7 +143,7 @@ const Home = () => {
             <Form className="d-flex" style={{ marginRight: '20px' }}>
               <Form.Control
                 type="search"
-                placeholder="Search"
+                placeholder="Enter Service Title"
                 value={title}
                 className="me-2"
                 aria-label="Search"
@@ -138,6 +156,31 @@ const Home = () => {
             </Form>
           </Accordion.Body>
         </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>Filter</Accordion.Header>
+          <Accordion.Body>
+            <Nav variant="pills" defaultActiveKey="/home">
+              <Nav.Item>
+                <Nav.Link eventKey="/home" onClick={getServices}>
+                  None
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="#" onClick={filterServicesByPrice}>
+                  Price less than 10
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  eventKey="link-1"
+                  onClick={filterServicesByEstimatedTime}
+                >
+                  Estimated Time less than 3 days
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Accordion.Body>
+        </Accordion.Item>
       </Accordion>
       <div className="home-container">
         {services.map((e) => {
@@ -145,8 +188,8 @@ const Home = () => {
             <Card style={{ width: '20rem' }} key={e._id}>
               <Card.Img variant="top" src="/logo.jpeg" />
               <Card.Body>
-                <Card.Title>{e.serviceTitle}</Card.Title>
-                <Card.Text>{e.serviceDescription}</Card.Text>
+                <Card.Title>Service Title: {e.serviceTitle}</Card.Title>
+                <Card.Text>Description: {e.serviceDescription}</Card.Text>
                 <p>Price: {e.price}</p>
                 <p>Estimated Time: {e.estimatedTime}</p>
                 <p>Service Provider: {e.serviceProvider.userName}</p>
