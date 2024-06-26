@@ -21,6 +21,7 @@ function App() {
   const [userServices, setUserServices] = useState([]);
   const [title, setTitle] = useState('');
   const [services, setServices] = useState([]);
+  const [originalServices, setOriginalServices] = useState([]);
 
   return (
     <>
@@ -40,6 +41,8 @@ function App() {
           setTitle,
           services,
           setServices,
+          originalServices,
+          setOriginalServices,
         }}
       >
         <NavBarComponent />

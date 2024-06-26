@@ -9,6 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
+import Pagination from 'react-bootstrap/Pagination';
 import Comments from './Comments';
 import Orders from './Orders';
 import './style.css';
@@ -24,12 +25,16 @@ const Home = () => {
     setServices,
     title,
     setTitle,
+    originalServices,
+    setOriginalServices,
   } = useContext(UserData);
+
   const [showComments, setShowComments] = useState(false);
   const [showOrders, setShowOrders] = useState(false);
   const [showConfirmOrder, setShowConfirmOrder] = useState(false);
   const [service, setService] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [paginationCounter, setPaginationCounter] = useState(0);
 
   const handelCloseComments = () => {
     setShowComments(false);
@@ -80,27 +85,28 @@ const Home = () => {
       })
       .then((res) => {
         setUserId(res.data.userId);
-        setServices(res.data.services);
+        setOriginalServices(res.data.services);
+        setPaginationCounter(0);
+        paginationHandler(0, res.data.services);
       })
       .catch(() => {
         navigator('/login');
       });
   };
 
+  const paginationHandler = (counter, servicesList = originalServices) => {
+    setServices(servicesList.slice(counter, counter + 9));
+  };
+
   const filterServicesByPrice = () => {
-    const filteredByPrice = services.filter((item) => {
-      if (item.price <= 10) {
-        return item;
-      }
-    });
+    const filteredByPrice = originalServices.filter((item) => item.price <= 10);
     setServices(filteredByPrice);
   };
+
   const filterServicesByEstimatedTime = () => {
-    const filteredByEstimatedTime = services.filter((item) => {
-      if (item.estimatedTime <= 3) {
-        return item;
-      }
-    });
+    const filteredByEstimatedTime = originalServices.filter(
+      (item) => item.estimatedTime <= 3
+    );
     setServices(filteredByEstimatedTime);
   };
 
@@ -110,31 +116,29 @@ const Home = () => {
       return;
     }
 
-    const filteredByTitle = services.filter((item) => {
-      if (item.serviceTitle.toLowerCase().includes(title.toLowerCase())) {
-        return item;
-      }
-    });
+    const filteredByTitle = originalServices.filter((item) =>
+      item.serviceTitle.toLowerCase().includes(title.toLowerCase())
+    );
     setServices(filteredByTitle);
   };
 
   useEffect(() => {
-    {
-      isLoggedIn ? getServices() : navigator('/login');
-    }
+    isLoggedIn ? getServices() : navigator('/login');
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    getSerivcesByTitle();
   }, [title]);
+
+  useEffect(() => {
+    paginationHandler(paginationCounter);
+  }, [paginationCounter]);
 
   return (
     <div>
       <h1 className="home-title">Our Services</h1>
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <Button
-          onClick={() => {
-            handelShowOrders();
-          }}
-        >
-          My Orders
-        </Button>
+        <Button onClick={handelShowOrders}>My Orders</Button>
       </div>
       <Accordion style={{ width: '70%', margin: '0 auto' }}>
         <Accordion.Item eventKey="0">
@@ -151,8 +155,6 @@ const Home = () => {
                   setTitle(e.target.value);
                 }}
               />
-
-              <Button onClick={getSerivcesByTitle}>Search</Button>
             </Form>
           </Accordion.Body>
         </Accordion.Item>
@@ -183,43 +185,78 @@ const Home = () => {
         </Accordion.Item>
       </Accordion>
       <div className="home-container">
-        {services.map((e) => {
-          return (
-            <Card style={{ width: '20rem' }} key={e._id}>
-              <Card.Img variant="top" src="/logo.jpeg" />
-              <Card.Body>
-                <Card.Title>Service Title: {e.serviceTitle}</Card.Title>
-                <Card.Text>Description: {e.serviceDescription}</Card.Text>
-                <p>Price: {e.price}</p>
-                <p>Estimated Time: {e.estimatedTime}</p>
-                <p>Service Provider: {e.serviceProvider.userName}</p>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    setService(e);
-                    handelShowComments();
-                  }}
-                >
-                  Comments
-                </Button>
-              </Card.Body>
-              <Card.Body>
-                <Button
-                  variant="primary"
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    setService(e);
-                    handelShowConfirmOrder();
-                  }}
-                >
-                  Order
-                </Button>
-              </Card.Body>
-            </Card>
-          );
-        })}
+        {services.map((e) => (
+          <Card style={{ width: '20rem' }} key={e._id}>
+            <Card.Img variant="top" src="/logo.jpeg" />
+            <Card.Body>
+              <Card.Title>Service Title: {e.serviceTitle}</Card.Title>
+              <Card.Text>Description: {e.serviceDescription}</Card.Text>
+              <p>Price: {e.price}</p>
+              <p>Estimated Time: {e.estimatedTime}</p>
+              <p>Service Provider: {e.serviceProvider.userName}</p>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setService(e);
+                  handelShowComments();
+                }}
+              >
+                Comments
+              </Button>
+            </Card.Body>
+            <Card.Body>
+              <Button
+                variant="primary"
+                style={{ width: '100%' }}
+                onClick={() => {
+                  setService(e);
+                  handelShowConfirmOrder();
+                }}
+              >
+                Order
+              </Button>
+            </Card.Body>
+          </Card>
+        ))}
       </div>
-      {/* Comments Mmodal */}
+      <div className="d-flex justify-content-center mt-5">
+        <Pagination>
+          <Pagination.Prev
+            onClick={() => {
+              const newCounter = paginationCounter - 9;
+              if (newCounter >= 0) {
+                setPaginationCounter(newCounter);
+                paginationHandler(newCounter);
+              }
+            }}
+          />
+          {[...Array(Math.ceil(originalServices.length / 9)).keys()].map(
+            (page) => (
+              <Pagination.Item
+                key={page}
+                active={page * 9 === paginationCounter}
+                onClick={() => {
+                  const newCounter = page * 9;
+                  setPaginationCounter(newCounter);
+                  paginationHandler(newCounter);
+                }}
+              >
+                {page + 1}
+              </Pagination.Item>
+            )
+          )}
+          <Pagination.Next
+            onClick={() => {
+              const newCounter = paginationCounter + 9;
+              if (newCounter < originalServices.length) {
+                setPaginationCounter(newCounter);
+                paginationHandler(newCounter);
+              }
+            }}
+          />
+        </Pagination>
+      </div>
+      {/* Comments Modal */}
       <Modal show={showComments} onHide={handelCloseComments} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Comments</Modal.Title>
