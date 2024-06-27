@@ -20,7 +20,6 @@ const Slider = () => {
             className="d-block w-100"
             src={ExampleCarouselImage1}
             alt="First slide"
-            style={{ height: '88vh' }}
           />
         </div>
         <Carousel.Caption>
@@ -52,7 +51,6 @@ const Slider = () => {
           className="d-block w-100"
           src={ExampleCarouselImage3}
           alt="Third slide"
-          style={{ height: '88vh' }}
         />
         <Carousel.Caption>
           <h3 className="slider_title">Professional Mechanical</h3>

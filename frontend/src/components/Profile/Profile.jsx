@@ -111,7 +111,6 @@ const Profile = () => {
           <NoServices />
         ) : (
           userServices.map((e) => {
-            console.log(e.imageLink);
             return (
               <Card style={{ width: '20rem' }} key={e._id}>
                 <Card.Img

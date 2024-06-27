@@ -14,6 +14,9 @@ import Comments from './Comments';
 import Orders from './Orders';
 import Slider from './Slider/Slider';
 import './style.css';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+
+import Bannar from '../Home/bannar.png';
 
 const Home = () => {
   const navigator = useNavigate();
@@ -36,6 +39,10 @@ const Home = () => {
   const [service, setService] = useState(null);
   const [success, setSuccess] = useState(false);
   const [paginationCounter, setPaginationCounter] = useState(0);
+  const [showOffCanvas, setShowOffCanvas] = useState(false);
+
+  const handleCloseCanvas = () => setShowOffCanvas(false);
+  const handleShowCanvas = () => setShowOffCanvas(true);
 
   const handelCloseComments = () => {
     setShowComments(false);
@@ -140,50 +147,61 @@ const Home = () => {
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
         <Slider />
         <h1 className="home-title">Our Services</h1>
-        <Button onClick={handelShowOrders}>My Orders</Button>
+        <div
+          className="controller"
+          style={{
+            position: 'sticky',
+            left: '20px',
+            top: '0px',
+            width: '50px',
+            height: '50px',
+          }}
+        >
+          <Button
+            style={{
+              backgroundColor: '#5795fd',
+              borderColor: '#5795fd',
+              marginBottom: '20px',
+            }}
+            onClick={handelShowOrders}
+            title="My Orders"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              className="bi bi-bag-check-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0m-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"
+              />
+            </svg>
+          </Button>
+          <Button
+            style={{
+              backgroundColor: '#5795fd',
+              borderColor: '#5795fd',
+            }}
+            onClick={handleShowCanvas}
+            title="Search"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              className="bi bi-search"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+          </Button>
+        </div>
       </div>
-      <Accordion style={{ width: '70%', margin: '0 auto' }}>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Search</Accordion.Header>
-          <Accordion.Body>
-            <Form.Control
-              type="text"
-              placeholder="Enter Service Title"
-              value={title}
-              className="me-2"
-              aria-label="Text"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>Filter</Accordion.Header>
-          <Accordion.Body>
-            <Nav variant="pills" defaultActiveKey="/home">
-              <Nav.Item>
-                <Nav.Link eventKey="/home" onClick={getServices}>
-                  None
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="#" onClick={filterServicesByPrice}>
-                  Price less than 10
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link
-                  eventKey="link-1"
-                  onClick={filterServicesByEstimatedTime}
-                >
-                  Estimated Time less than 3 days
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+
       <div className="home-container">
         {services.map((e) => (
           <Card style={{ width: '20rem' }} key={e._id}>
@@ -210,8 +228,11 @@ const Home = () => {
             </Card.Body>
             <Card.Body>
               <Button
-                variant="primary"
-                style={{ width: '100%' }}
+                style={{
+                  width: '100%',
+                  backgroundColor: '#5795fd',
+                  borderColor: '#5795fd',
+                }}
                 onClick={() => {
                   setService(e);
                   handelShowConfirmOrder();
@@ -260,8 +281,63 @@ const Home = () => {
           />
         </Pagination>
       </div>
+      <div>
+        <img src={Bannar} alt="bannar" style={{ width: '100%' }} />
+      </div>
+
+      {/* Search OffCanvas*/}
+      <Offcanvas show={showOffCanvas} onHide={handleCloseCanvas}>
+        <Offcanvas.Header style={{ marginTop: '100px' }} closeButton>
+          <Offcanvas.Title>Search & Filter</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Form.Control
+            type="text"
+            placeholder="Enter Service Title"
+            value={title}
+            className="me-2"
+            aria-label="Text"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <br />
+          <Accordion style={{ width: '100%', margin: '0 auto' }}>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Filter</Accordion.Header>
+              <Accordion.Body>
+                <Nav variant="pills" defaultActiveKey="/home">
+                  <Nav.Item>
+                    <Nav.Link eventKey="/home" onClick={getServices}>
+                      None
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="#" onClick={filterServicesByPrice}>
+                      Price less than 10
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link
+                      eventKey="link-1"
+                      onClick={filterServicesByEstimatedTime}
+                    >
+                      Estimated Time less than 3 days
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Offcanvas.Body>
+      </Offcanvas>
       {/* Comments Modal */}
-      <Modal show={showComments} onHide={handelCloseComments} size="lg">
+      <Modal
+        show={showComments}
+        onHide={handelCloseComments}
+        size="lg"
+        style={{ marginTop: '100px' }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Comments</Modal.Title>
         </Modal.Header>
@@ -279,7 +355,12 @@ const Home = () => {
         </Modal.Footer>
       </Modal>
       {/* Orders Modal */}
-      <Modal show={showOrders} onHide={handelCloseOrders} size="lg">
+      <Modal
+        show={showOrders}
+        onHide={handelCloseOrders}
+        size="lg"
+        style={{ marginTop: '100px' }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Orders</Modal.Title>
         </Modal.Header>
@@ -293,7 +374,11 @@ const Home = () => {
         </Modal.Footer>
       </Modal>
       {/* Confirm Order */}
-      <Modal show={showConfirmOrder} onHide={handelCloseConfirmOrder}>
+      <Modal
+        show={showConfirmOrder}
+        onHide={handelCloseConfirmOrder}
+        style={{ marginTop: '100px' }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>
             Are You Sure you want to order this Service??
