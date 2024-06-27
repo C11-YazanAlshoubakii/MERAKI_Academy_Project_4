@@ -194,7 +194,7 @@ const Home = () => {
               <Card.Title>Service Title: {e.serviceTitle}</Card.Title>
               <Card.Text>Description: {e.serviceDescription}</Card.Text>
               <p>Price: {e.price}</p>
-              <p>Estimated Time: {e.estimatedTime}</p>
+              <p>Estimated Time: {e.estimatedTime} Days</p>
               <p>Service Provider: {e.serviceProvider.userName}</p>
               <Button
                 variant="secondary"

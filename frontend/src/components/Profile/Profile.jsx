@@ -114,7 +114,11 @@ const Profile = () => {
             console.log(e.imageLink);
             return (
               <Card style={{ width: '20rem' }} key={e._id}>
-                <Card.Img variant="top" src={e.imageLink} />
+                <Card.Img
+                  variant="top"
+                  src={e.imageLink}
+                  style={{ height: '212px' }}
+                />
                 <Card.Body>
                   <Card.Title>{e.serviceTitle}</Card.Title>
                   <Card.Text>{e.serviceDescription}</Card.Text>

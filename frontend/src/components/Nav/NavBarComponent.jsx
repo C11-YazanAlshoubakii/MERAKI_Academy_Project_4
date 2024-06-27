@@ -23,7 +23,12 @@ const NavBarComponent = () => {
           <img
             src="/logo.jpeg"
             alt="logo"
-            style={{ width: '4rem', height: '4rem', cursor: 'pointer' }}
+            style={{
+              width: '4rem',
+              height: '4rem',
+              cursor: 'pointer',
+              borderRadius: '11px',
+            }}
           />
         </Navbar.Brand>
 
