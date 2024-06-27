@@ -35,7 +35,7 @@ const Login = () => {
       <h2 className="reg-comp__title">Login</h2>
       <div className="reg-comp">
         <div className="img-box">
-          <img src="/logo.jpeg" alt="logo" className="img" />
+          <img src="/logo.png" alt="logo" className="img" />
         </div>
         <div className="register-box">
           <div className="form-control-box">

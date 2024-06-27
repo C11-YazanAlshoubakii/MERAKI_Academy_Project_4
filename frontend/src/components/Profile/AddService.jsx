@@ -45,9 +45,7 @@ function AddService({ close }) {
       .post('http://localhost:5000/services/', newService, {
         headers: { authorization: token },
       })
-      .then((res) => {
-        console.log(res, 'Done');
-        console.log(imageURL);
+      .then(() => {
         setUserServices([...userServices, newService]);
         close();
       })

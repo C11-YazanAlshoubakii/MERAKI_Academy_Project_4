@@ -81,7 +81,7 @@ const Register = () => {
       <div className="reg-comp">
         <div className="img-box">
           {' '}
-          <img src="/logo.jpeg" className="img" alt="logo" />
+          <img src="/logo.png" className="img" alt="logo" />
         </div>
         <div className="register-box">
           <div className="form-control-box">

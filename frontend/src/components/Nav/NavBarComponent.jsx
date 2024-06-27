@@ -21,11 +21,11 @@ const NavBarComponent = () => {
           }}
         >
           <img
-            src="/logo.jpeg"
+            src="/logo.png"
             alt="logo"
             style={{
-              width: '4rem',
-              height: '4rem',
+              width: '5rem',
+              height: '5rem',
               cursor: 'pointer',
               borderRadius: '11px',
             }}

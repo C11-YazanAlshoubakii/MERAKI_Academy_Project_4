@@ -12,6 +12,7 @@ import Nav from 'react-bootstrap/Nav';
 import Pagination from 'react-bootstrap/Pagination';
 import Comments from './Comments';
 import Orders from './Orders';
+import Slider from './Slider/Slider';
 import './style.css';
 
 const Home = () => {
@@ -136,8 +137,9 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="home-title">Our Services</h1>
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <Slider />
+        <h1 className="home-title">Our Services</h1>
         <Button onClick={handelShowOrders}>My Orders</Button>
       </div>
       <Accordion style={{ width: '70%', margin: '0 auto' }}>
