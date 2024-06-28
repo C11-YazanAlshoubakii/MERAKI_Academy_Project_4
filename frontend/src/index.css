@@ -8,6 +8,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 html {
   font-size: 62.5%;
 }
@@ -23,15 +24,79 @@ body {
     font-size: 50%;
   }
 }
+@media (max-width: 700px) {
+  html {
+    font-size: 45%;
+  }
+  .slider_title {
+    font-size: 3rem;
+  }
+  .home-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid--4--cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .profile-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .slider_title {
+    font-size: 2.5rem;
+  }
+  .slider_desc {
+    font-size: 1.8rem;
+  }
+  .grid--footer {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .addService {
+    position: static;
+    flex-direction: row;
+    width: 20rem;
+    margin: 0 auto;
+  }
+  .controller {
+    position: static;
+    display: inline;
+    margin-bottom: 0;
+  }
+  .my-orders {
+    margin-bottom: 0;
+    margin-right: 2rem;
+  }
+}
 
 @media (max-width: 400px) {
   html {
     font-size: 40%;
   }
+  .slider_title {
+    font-size: 1.8rem;
+  }
+  .slider_desc {
+    font-size: 1.4rem;
+  }
+  .home-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .grid--4--cols {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .profile-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .grid--footer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 @media (max-width: 320px) {
   html {
-    font-size: 30%;
+    font-size: 35%;
   }
 }

@@ -65,9 +65,10 @@ const UpdateService = ({ service, token, onUpdate }) => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 fs-3">
           <Form.Label className="fs-3">Service Estimated Time</Form.Label>
           <Form.Control
+            className="fs-3"
             defaultValue={service.estimatedTime}
             onChange={(e) => {
               setEstimatedTime(e.target.value);

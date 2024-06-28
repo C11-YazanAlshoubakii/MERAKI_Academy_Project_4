@@ -16,3 +16,17 @@
   margin-bottom: 30px;
   color: #5795fd;
 }
+
+.controller {
+  position: sticky;
+  left: 20px;
+  top: 0px;
+  width: 7rem;
+  height: 7rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.my-orders {
+  margin-bottom: 2rem;
+}
