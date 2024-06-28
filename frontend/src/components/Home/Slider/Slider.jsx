@@ -6,7 +6,7 @@ import ExampleCarouselImage3 from '../Slider/slider3.png';
 
 const Slider = () => {
   return (
-    <Carousel>
+    <Carousel style={{ marginBottom: '50px' }}>
       <Carousel.Item>
         <div
           style={{
@@ -22,9 +22,9 @@ const Slider = () => {
             alt="First slide"
           />
         </div>
-        <Carousel.Caption>
-          <h3 className="slider_title">Professional Electricians</h3>
-          <p className="slider-desc">
+        <Carousel.Caption style={{ bottom: '40%' }}>
+          <h3 className="slider_title ">Professional Electricians</h3>
+          <p className="fs-2">
             Power up your peace of mind with our top-notch electrical
             maintenance services – ensuring safety, reliability, and efficiency
             in every connection!
@@ -37,9 +37,9 @@ const Slider = () => {
           src={ExampleCarouselImage2}
           alt="Second slide"
         />
-        <Carousel.Caption>
+        <Carousel.Caption style={{ bottom: '40%' }}>
           <h3 className="slider_title">Professional Farmers</h3>
-          <p className="slider-desc">
+          <p className="fs-2">
             Harvest the best of nature with our innovative farming solutions –
             nurturing growth, sustainability, and bountiful yields for a greener
             tomorrow!
@@ -52,9 +52,9 @@ const Slider = () => {
           src={ExampleCarouselImage3}
           alt="Third slide"
         />
-        <Carousel.Caption>
+        <Carousel.Caption style={{ bottom: '40%' }}>
           <h3 className="slider_title">Professional Mechanical</h3>
-          <p className="slider-desc">
+          <p className="fs-2">
             Optimize your operations with our premier mechanical maintenance
             services – where precision, performance, and reliability meet for
             seamless productivity!

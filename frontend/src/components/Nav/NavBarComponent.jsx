@@ -30,8 +30,8 @@ const NavBarComponent = () => {
             src="/logo.png"
             alt="logo"
             style={{
-              width: '5rem',
-              height: '5rem',
+              width: '8rem',
+              height: '8rem',
               cursor: 'pointer',
               borderRadius: '11px',
             }}
@@ -46,12 +46,14 @@ const NavBarComponent = () => {
                 onClick={() => {
                   navigator('/home');
                 }}
+                className="fs-2"
                 style={{ color: '#5795fd' }}
               >
                 Home
               </Button>
               <Button
                 variant="link"
+                className="fs-2"
                 style={{ color: '#5795fd' }}
                 onClick={() => {
                   navigator('/profile');
@@ -61,6 +63,7 @@ const NavBarComponent = () => {
               </Button>
               <Button
                 variant="link"
+                className="fs-2"
                 style={{ color: '#5795fd' }}
                 onClick={() => {
                   navigator('/logout');
@@ -70,7 +73,13 @@ const NavBarComponent = () => {
               </Button>
             </Nav>
             <Nav className="user-badge">
-              <h3 style={{ backgroundColor: '#5795fd', borderRadius: '7px' }}>
+              <h3
+                style={{
+                  backgroundColor: '#5795fd',
+                  borderRadius: '7px',
+                  padding: '5px',
+                }}
+              >
                 <Badge
                   bg="0"
                   onClick={() => {
@@ -80,12 +89,12 @@ const NavBarComponent = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="20"
+                    height="20"
                     fill="currentColor"
                     className="bi bi-person-circle"
                     viewBox="0 0 16 16"
-                    style={{ verticalAlign: '0' }}
+                    style={{ verticalAlign: '-3' }}
                   >
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                     <path
@@ -93,7 +102,7 @@ const NavBarComponent = () => {
                       d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
                     />
                   </svg>
-                  <span> {userName}</span>
+                  <span className="fs-2"> {userName}</span>
                 </Badge>
               </h3>
             </Nav>
@@ -102,6 +111,7 @@ const NavBarComponent = () => {
           <Nav className="me-auto">
             <Button
               variant="link"
+              className="fs-2"
               style={{ color: '#5795fd' }}
               onClick={() => {
                 navigator('/register');
@@ -111,6 +121,7 @@ const NavBarComponent = () => {
             </Button>
             <Button
               variant="link"
+              className="fs-2"
               style={{ color: '#5795fd' }}
               onClick={() => {
                 navigator('/login');

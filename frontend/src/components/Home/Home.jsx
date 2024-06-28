@@ -144,7 +144,7 @@ const Home = () => {
 
   return (
     <div>
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <div style={{ textAlign: 'center' }}>
         <Slider />
         <h1 className="home-title">Our Services</h1>
         <div
@@ -153,8 +153,8 @@ const Home = () => {
             position: 'sticky',
             left: '20px',
             top: '0px',
-            width: '50px',
-            height: '50px',
+            width: '5rem',
+            height: '5rem',
           }}
         >
           <Button
@@ -204,19 +204,26 @@ const Home = () => {
 
       <div className="home-container">
         {services.map((e) => (
-          <Card style={{ width: '20rem' }} key={e._id}>
+          <Card style={{ width: '90%' }} key={e._id}>
             <Card.Img
               variant="top"
               src={e.imageLink}
-              style={{ height: '212px' }}
+              style={{ height: '210px' }}
             />
-            <Card.Body>
-              <Card.Title>Service Title: {e.serviceTitle}</Card.Title>
-              <Card.Text>Description: {e.serviceDescription}</Card.Text>
-              <p>Price: {e.price}</p>
-              <p>Estimated Time: {e.estimatedTime} Days</p>
-              <p>Service Provider: {e.serviceProvider.userName}</p>
+            <Card.Body style={{ padding: '15px' }}>
+              <Card.Title className="fs-1">
+                Service Title: {e.serviceTitle}
+              </Card.Title>
+              <Card.Text className="fs-2">
+                Description: {e.serviceDescription}
+              </Card.Text>
+              <p className="fs-4">Price: {e.price}</p>
+              <p className="fs-4">Estimated Time: {e.estimatedTime} Days</p>
+              <p className="fs-4">
+                Service Provider: {e.serviceProvider.userName}
+              </p>
               <Button
+                className="fs-4"
                 variant="secondary"
                 onClick={() => {
                   setService(e);
@@ -228,6 +235,7 @@ const Home = () => {
             </Card.Body>
             <Card.Body>
               <Button
+                className="fs-2"
                 style={{
                   width: '100%',
                   backgroundColor: '#5795fd',
@@ -247,6 +255,7 @@ const Home = () => {
       <div className="d-flex justify-content-center mt-5">
         <Pagination>
           <Pagination.Prev
+            linkClassName="fs-3"
             onClick={() => {
               const newCounter = paginationCounter - 9;
               if (newCounter >= 0) {
@@ -258,6 +267,11 @@ const Home = () => {
           {[...Array(Math.ceil(originalServices.length / 9)).keys()].map(
             (page) => (
               <Pagination.Item
+                linkClassName="fs-3"
+                linkStyle={{
+                  backgroundColor: '#5795fd',
+                  borderColor: '#5795fd',
+                }}
                 key={page}
                 active={page * 9 === paginationCounter}
                 onClick={() => {
@@ -271,6 +285,7 @@ const Home = () => {
             )
           )}
           <Pagination.Next
+            linkClassName="fs-3"
             onClick={() => {
               const newCounter = paginationCounter + 9;
               if (newCounter < originalServices.length) {
