@@ -13,8 +13,9 @@ import Pagination from 'react-bootstrap/Pagination';
 import Comments from './Comments';
 import Orders from './Orders';
 import Slider from './Slider/Slider';
-import './style.css';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import About from '../About/About';
+import './style.css';
 
 import Bannar from '../Home/bannar.png';
 
@@ -292,13 +293,14 @@ const Home = () => {
           />
         </Pagination>
       </div>
-      <div style={{ width: '100%', borderBottom: '1px solid #eee' }}>
+      <div style={{ width: '100%' }}>
         <img
           src={Bannar}
           alt="bannar"
           style={{ width: '100%', height: '', marginBottom: '50px' }}
         />
       </div>
+      <About />
 
       {/* Search OffCanvas*/}
       <Offcanvas show={showOffCanvas} onHide={handleCloseCanvas}>

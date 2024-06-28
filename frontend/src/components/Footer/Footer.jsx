@@ -99,7 +99,7 @@ const Footer = () => {
           <p className="footer-heading">Company</p>
           <ul className="footer-nav">
             <li>
-              <a className="footer-link" href="#">
+              <a className="footer-link" href="#about">
                 About Handy Masters
               </a>
             </li>

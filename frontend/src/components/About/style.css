@@ -1,0 +1,43 @@
+.grid--4--cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+.gap-20 {
+  gap: 20px;
+}
+
+.plan-details {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 9.6rem;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-icon {
+  background-color: #5795fd;
+  margin-bottom: 3.2rem;
+  padding: 1.6rem;
+  border-radius: 50%;
+}
+
+.feature-title {
+  font-size: 2.4rem;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 1.6rem;
+}
+
+.feature-text {
+  font-size: 1.8rem;
+  line-height: 1.8;
+}
+
+#about {
+  margin-bottom: 9.6rem;
+}
