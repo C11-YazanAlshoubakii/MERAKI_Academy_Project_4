@@ -1,3 +1,7 @@
 .user-badge {
   margin-left: auto;
 }
+
+.nav-link:hover {
+  text-decoration: underline !important;
+}

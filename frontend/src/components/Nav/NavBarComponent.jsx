@@ -46,15 +46,15 @@ const NavBarComponent = () => {
                 onClick={() => {
                   navigator('/home');
                 }}
-                className="fs-2"
-                style={{ color: '#5795fd' }}
+                className="fs-2 nav-link"
+                style={{ color: '#5795fd', textDecoration: 'none' }}
               >
                 Home
               </Button>
               <Button
                 variant="link"
-                className="fs-2"
-                style={{ color: '#5795fd' }}
+                className="fs-2 nav-link"
+                style={{ color: '#5795fd', textDecoration: 'none' }}
                 onClick={() => {
                   navigator('/profile');
                 }}
@@ -63,8 +63,8 @@ const NavBarComponent = () => {
               </Button>
               <Button
                 variant="link"
-                className="fs-2"
-                style={{ color: '#5795fd' }}
+                className="fs-2 nav-link"
+                style={{ color: '#5795fd', textDecoration: 'none' }}
                 onClick={() => {
                   navigator('/logout');
                 }}
@@ -111,8 +111,8 @@ const NavBarComponent = () => {
           <Nav className="me-auto">
             <Button
               variant="link"
-              className="fs-2"
-              style={{ color: '#5795fd' }}
+              className="fs-2 nav-link"
+              style={{ color: '#5795fd', textDecoration: 'none' }}
               onClick={() => {
                 navigator('/register');
               }}
@@ -121,8 +121,8 @@ const NavBarComponent = () => {
             </Button>
             <Button
               variant="link"
-              className="fs-2"
-              style={{ color: '#5795fd' }}
+              className="fs-2 nav-link"
+              style={{ color: '#5795fd', textDecoration: 'none' }}
               onClick={() => {
                 navigator('/login');
               }}
