@@ -32,9 +32,9 @@ const UpdateService = ({ service, token, onUpdate }) => {
   return (
     <div>
       <div className="update-service">
-        <h2 className="profile-title">Update Service</h2>
+        <h2 className="update-edit_title">Update Service</h2>
         <Form.Group className="mb-3">
-          <Form.Label>Service Title</Form.Label>
+          <Form.Label className="fs-3">Service Title</Form.Label>
           <Form.Control
             defaultValue={service.serviceTitle}
             onChange={(e) => {
@@ -44,7 +44,7 @@ const UpdateService = ({ service, token, onUpdate }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Service Description</Form.Label>
+          <Form.Label className="fs-3">Service Description</Form.Label>
           <Form.Control
             as="textarea"
             rows={3}
@@ -56,7 +56,7 @@ const UpdateService = ({ service, token, onUpdate }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Service Price</Form.Label>
+          <Form.Label className="fs-3">Service Price</Form.Label>
           <Form.Control
             defaultValue={service.price}
             onChange={(e) => {
@@ -66,7 +66,7 @@ const UpdateService = ({ service, token, onUpdate }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Service Estimated Time</Form.Label>
+          <Form.Label className="fs-3">Service Estimated Time</Form.Label>
           <Form.Control
             defaultValue={service.estimatedTime}
             onChange={(e) => {
@@ -76,7 +76,8 @@ const UpdateService = ({ service, token, onUpdate }) => {
           />
         </Form.Group>
         <Button
-          variant="primary"
+          className="fs-3"
+          bg={'#5795fd'}
           onClick={() => {
             updateHandeler(service._id);
           }}

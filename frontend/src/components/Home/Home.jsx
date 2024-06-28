@@ -153,13 +153,14 @@ const Home = () => {
             position: 'sticky',
             left: '20px',
             top: '0px',
-            width: '5rem',
-            height: '5rem',
+            width: '7rem',
+            height: '7rem',
+            fontSize: '1.2rem',
+            fontWeight: '700',
           }}
         >
           <Button
             style={{
-              marginBottom: '20px',
               backgroundColor: '#5795fd',
               borderColor: '#5795fd',
             }}
@@ -180,6 +181,7 @@ const Home = () => {
               />
             </svg>
           </Button>
+          <p>My Orders</p>
           <Button
             style={{ backgroundColor: '#5795fd', borderColor: '#5795fd' }}
             onClick={handleShowCanvas}
@@ -196,6 +198,7 @@ const Home = () => {
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
             </svg>
           </Button>
+          <p>Search</p>
         </div>
       </div>
 
@@ -252,7 +255,7 @@ const Home = () => {
       <div className="d-flex justify-content-center mt-5">
         <Pagination>
           <Pagination.Prev
-            linkClassName="fs-3"
+            linkClassName="fs-2"
             onClick={() => {
               const newCounter = paginationCounter - 9;
               if (newCounter >= 0) {
@@ -264,11 +267,7 @@ const Home = () => {
           {[...Array(Math.ceil(originalServices.length / 9)).keys()].map(
             (page) => (
               <Pagination.Item
-                linkClassName="fs-3"
-                linkStyle={{
-                  backgroundColor: '#5795fd',
-                  borderColor: '#5795fd',
-                }}
+                linkClassName="fs-2"
                 key={page}
                 active={page * 9 === paginationCounter}
                 onClick={() => {
@@ -282,7 +281,7 @@ const Home = () => {
             )
           )}
           <Pagination.Next
-            linkClassName="fs-3"
+            linkClassName="fs-2"
             onClick={() => {
               const newCounter = paginationCounter + 9;
               if (newCounter < originalServices.length) {
@@ -300,23 +299,27 @@ const Home = () => {
       {/* Search OffCanvas*/}
       <Offcanvas show={showOffCanvas} onHide={handleCloseCanvas}>
         <Offcanvas.Header style={{ marginTop: '100px' }} closeButton>
-          <Offcanvas.Title>Search & Filter</Offcanvas.Title>
+          <Offcanvas.Title className="fs-2">Search & Filter</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Form.Control
             type="text"
             placeholder="Enter Service Title"
             value={title}
-            className="me-2"
+            className="me-2 fs-3"
             aria-label="Text"
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
           <br />
-          <Accordion style={{ width: '100%', margin: '0 auto' }}>
+          <Accordion
+            style={{ width: '100%', margin: '0 auto', fontSize: '1.4rem' }}
+          >
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Filter</Accordion.Header>
+              <Accordion.Header>
+                <span style={{ fontSize: '2rem' }}>Filter</span>
+              </Accordion.Header>
               <Accordion.Body>
                 <Nav variant="pills" defaultActiveKey="/home">
                   <Nav.Item>
@@ -350,8 +353,8 @@ const Home = () => {
         size="lg"
         style={{ marginTop: '100px' }}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Comments</Modal.Title>
+        <Modal.Header className="fs-4" closeButton>
+          <Modal.Title style={{ fontSize: '2.8rem' }}>Comments</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Comments
@@ -361,7 +364,11 @@ const Home = () => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handelCloseComments}>
+          <Button
+            variant="secondary"
+            className="fs-4"
+            onClick={handelCloseComments}
+          >
             Close
           </Button>
         </Modal.Footer>
@@ -373,14 +380,18 @@ const Home = () => {
         size="lg"
         style={{ marginTop: '100px' }}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Orders</Modal.Title>
+        <Modal.Header className="fs-4" closeButton>
+          <Modal.Title className="fs-2">Orders</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Orders />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handelCloseOrders}>
+          <Button
+            variant="secondary"
+            className="fs-4"
+            onClick={handelCloseOrders}
+          >
             Close
           </Button>
         </Modal.Footer>
@@ -391,13 +402,14 @@ const Home = () => {
         onHide={handelCloseConfirmOrder}
         style={{ marginTop: '100px' }}
       >
-        <Modal.Header closeButton>
+        <Modal.Header className="fs-4" closeButton>
           <Modal.Title>
             Are You Sure you want to order this Service??
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Button
+            className="fs-4"
             style={{ width: '100%' }}
             onClick={() => {
               addOrder(service._id);
@@ -406,9 +418,16 @@ const Home = () => {
             Order
           </Button>
         </Modal.Body>
-        <Modal.Footer style={{ justifyContent: 'space-between' }}>
+        <Modal.Footer
+          className="fs-4"
+          style={{ justifyContent: 'space-between' }}
+        >
           {success && <Alert variant="success">Order Added Successfully</Alert>}
-          <Button variant="secondary" onClick={handelCloseConfirmOrder}>
+          <Button
+            variant="secondary"
+            className="fs-4"
+            onClick={handelCloseConfirmOrder}
+          >
             Close
           </Button>
         </Modal.Footer>

@@ -67,16 +67,18 @@ function AddService({ close }) {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Service Title</Form.Label>
+        <Form.Label className="fs-3">Service Title</Form.Label>
         <Form.Control
+          className="fs-3"
           type="text"
           placeholder="Service Title"
           onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Service Description</Form.Label>
+        <Form.Label className="fs-3">Service Description</Form.Label>
         <Form.Control
+          className="fs-3"
           as="textarea"
           rows={3}
           placeholder="Service Description"
@@ -84,29 +86,32 @@ function AddService({ close }) {
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-        <Form.Label>Price</Form.Label>
+        <Form.Label className="fs-3">Price</Form.Label>
         <Form.Control
+          className="fs-3"
           type="text"
           placeholder="Price"
           onChange={(e) => setPrice(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-        <Form.Label>Estimated Time</Form.Label>
+        <Form.Label className="fs-3">Estimated Time</Form.Label>
         <Form.Control
+          className="fs-3"
           type="text"
           placeholder="Estimated Time"
           onChange={(e) => setTime(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-        <Form.Label>Service Image</Form.Label>
+        <Form.Label className="fs-3">Service Image</Form.Label>
         <Form.Control
+          className="fs-3"
           type="file"
           onChange={(e) => setImage(e.target.files[0])}
         />
       </Form.Group>
-      <Button variant="primary" onClick={handleAddService}>
+      <Button variant="primary" className="fs-3" onClick={handleAddService}>
         Add
       </Button>
     </Form>

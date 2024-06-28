@@ -72,7 +72,7 @@ const Orders = () => {
   return (
     <div>
       <Table striped bordered hover>
-        <thead>
+        <thead className="fs-3">
           <tr>
             <th>No.</th>
             <th>Service Title</th>
@@ -81,7 +81,7 @@ const Orders = () => {
             <th>Completed</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="fs-4">
           {order.map((e, i) => {
             const variantClass = changeVariantClass(e.status);
             return (
@@ -93,6 +93,7 @@ const Orders = () => {
                   {
                     <Dropdown>
                       <Dropdown.Toggle
+                        className="fs-4"
                         variant={variantClass}
                         id="dropdown-basic"
                       >
@@ -100,6 +101,7 @@ const Orders = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu
+                        className="fs-4"
                         onClick={(x) => {
                           const newStatus = x.target.id;
                           changeOrderStatus(e._id, newStatus);
@@ -114,11 +116,16 @@ const Orders = () => {
                 </td>
                 <td>
                   <Dropdown>
-                    <Dropdown.Toggle variant="info" id="dropdown-basic">
+                    <Dropdown.Toggle
+                      variant="info"
+                      className="fs-4"
+                      id="dropdown-basic"
+                    >
                       {e.completed.toString()}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu
+                      className="fs-4"
                       onClick={(x) => {
                         const isCompleted = x.target.id === 'true';
                         changeOrderCompleted(e._id, isCompleted);

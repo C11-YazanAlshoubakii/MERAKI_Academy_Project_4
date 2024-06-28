@@ -13,6 +13,7 @@ const DeleteOrder = ({ disabled, id, onDelete }) => {
   const handelCloseConfirmDelete = () => {
     setShowConfirmDelete(false);
     setSuccess(false);
+    onDelete(userId);
   };
 
   const handelShowConfirmDelete = () => {
@@ -26,6 +27,7 @@ const DeleteOrder = ({ disabled, id, onDelete }) => {
       })
       .then((res) => {
         console.log(`Deleted Service with ID ${res}`);
+        handelCloseConfirmDelete();
         onDelete(userId);
       })
       .catch((err) => {
@@ -36,6 +38,7 @@ const DeleteOrder = ({ disabled, id, onDelete }) => {
   const deleteBtn = (
     <>
       <Button
+        className="fs-4"
         variant="danger"
         onClick={() => {
           handelShowConfirmDelete();
@@ -43,7 +46,11 @@ const DeleteOrder = ({ disabled, id, onDelete }) => {
       >
         Delete
       </Button>
-      <Modal show={showConfirmDelete} onHide={handelCloseConfirmDelete}>
+      <Modal
+        show={showConfirmDelete}
+        style={{ marginTop: '100px' }}
+        onHide={handelCloseConfirmDelete}
+      >
         <Modal.Header closeButton>
           <Modal.Title>
             Are You Sure you want to delete this order ??
@@ -52,9 +59,11 @@ const DeleteOrder = ({ disabled, id, onDelete }) => {
         <Modal.Body>
           <Button
             variant="danger"
+            className="fs-4"
             style={{ width: '100%' }}
             onClick={() => {
               deleteOrder(id);
+              onDelete(userId);
             }}
           >
             Delete
@@ -62,7 +71,11 @@ const DeleteOrder = ({ disabled, id, onDelete }) => {
         </Modal.Body>
         <Modal.Footer style={{ justifyContent: 'space-between' }}>
           {success && <Alert variant="success">Order Added Successfully</Alert>}
-          <Button variant="secondary" onClick={handelCloseConfirmDelete}>
+          <Button
+            variant="secondary"
+            className="fs-4"
+            onClick={handelCloseConfirmDelete}
+          >
             Close
           </Button>
         </Modal.Footer>

@@ -6,22 +6,28 @@
   gap: 30px;
   align-content: center;
   justify-items: center;
+  margin-bottom: 50px;
 }
 
 .profile-title {
+  margin: 50px;
+  font-size: 4.4rem;
+  font-weight: 700;
   text-align: center;
   grid-column: 2 / 3;
+  color: #5795fd;
 }
 
 .addService {
-  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
   left: 20px;
-  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .addService button {
@@ -30,4 +36,10 @@
 }
 .addService button:hover {
   background-color: #5795fd;
+}
+
+.update-edit_title {
+  color: #5795fd;
+  font-size: 3.2rem;
+  margin-bottom: 10px;
 }
