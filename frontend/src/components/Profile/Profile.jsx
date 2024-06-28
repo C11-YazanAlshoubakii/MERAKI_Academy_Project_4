@@ -313,7 +313,7 @@ const Profile = () => {
         size="lg"
         style={{ marginTop: '100px' }}
       >
-        <Modal.Header closeButton>
+        <Modal.Header className="fs-4" closeButton>
           <Modal.Title className="fs-3">Add New Service</Modal.Title>
         </Modal.Header>
         <Modal.Body>

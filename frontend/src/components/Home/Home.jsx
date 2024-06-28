@@ -293,7 +293,11 @@ const Home = () => {
         </Pagination>
       </div>
       <div>
-        <img src={Bannar} alt="bannar" style={{ width: '100%' }} />
+        <img
+          src={Bannar}
+          alt="bannar"
+          style={{ width: '100%', height: '', marginBottom: '50px' }}
+        />
       </div>
 
       {/* Search OffCanvas*/}

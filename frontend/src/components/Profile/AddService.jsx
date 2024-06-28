@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { UserData } from '../../App';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
 
 function AddService({ close }) {
@@ -12,6 +13,7 @@ function AddService({ close }) {
   const [time, setTime] = useState('');
   const [image, setImage] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const uploadImage = () => {
     const data = new FormData();
@@ -47,14 +49,17 @@ function AddService({ close }) {
       })
       .then(() => {
         setUserServices([...userServices, newService]);
+        setLoading(false);
         close();
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
   const handleAddService = () => {
+    setLoading(true);
     uploadImage()
       .then((uploadedImageUrl) => {
         addNewService(uploadedImageUrl);
@@ -112,7 +117,11 @@ function AddService({ close }) {
         />
       </Form.Group>
       <Button variant="primary" className="fs-3" onClick={handleAddService}>
-        Add
+        {loading ? (
+          <Spinner animation="border" variant="light" size="lg" />
+        ) : (
+          'Add'
+        )}
       </Button>
     </Form>
   );
