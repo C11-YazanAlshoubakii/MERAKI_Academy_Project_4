@@ -210,13 +210,9 @@ const Home = () => {
               style={{ height: '210px' }}
             />
             <Card.Body style={{ padding: '15px' }}>
-              <Card.Title className="fs-1">
-                Service Title: {e.serviceTitle}
-              </Card.Title>
-              <Card.Text className="fs-2">
-                Description: {e.serviceDescription}
-              </Card.Text>
-              <p className="fs-4">Price: {e.price}</p>
+              <Card.Title className="fs-1">{e.serviceTitle}</Card.Title>
+              <Card.Text className="fs-2">{e.serviceDescription}</Card.Text>
+              <p className="fs-4">{e.price}$</p>
               <p className="fs-4">Estimated Time: {e.estimatedTime} Days</p>
               <p className="fs-4">
                 Service Provider: {e.serviceProvider.userName}
