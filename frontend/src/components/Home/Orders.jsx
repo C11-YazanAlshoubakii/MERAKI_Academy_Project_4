@@ -64,8 +64,8 @@ const Orders = () => {
           <span style={{ fontSize: '3rem', color: '#5795fd' }}>No Orders</span>
           <svg
             data-name="Layer 1"
-            width="700"
-            height="512.20805"
+            width="480"
+            height="500"
             viewBox="0 0 790 512.20805"
           >
             <path
