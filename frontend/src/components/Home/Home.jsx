@@ -292,7 +292,7 @@ const Home = () => {
           />
         </Pagination>
       </div>
-      <div>
+      <div style={{ width: '100%', borderBottom: '1px solid #eee' }}>
         <img
           src={Bannar}
           alt="bannar"

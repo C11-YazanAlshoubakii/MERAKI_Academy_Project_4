@@ -17,3 +17,21 @@ body {
   background-color: #f3f1e4;
   font-family: 'Open Sans', sans-serif;
 }
+
+@media (max-width: 1000px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 40%;
+  }
+}
+
+@media (max-width: 320px) {
+  html {
+    font-size: 30%;
+  }
+}

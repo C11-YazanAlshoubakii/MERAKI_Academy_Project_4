@@ -7,6 +7,7 @@ import Error from './components/NotFound/NotFound';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import NavBarComponent from './components/Nav/NavBarComponent';
+import Footer from './components/Footer/Footer';
 
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -55,6 +56,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Error />} />
         </Routes>
+        <Footer />
       </UserData.Provider>
     </>
   );
