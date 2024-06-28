@@ -16,3 +16,8 @@
   margin-bottom: 30px;
   color: #5795fd;
 }
+
+.button:hover {
+  background-color: #5795fd !important;
+  border-color: #5795fd !important;
+}
