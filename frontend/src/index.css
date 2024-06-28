@@ -23,14 +23,6 @@ body {
   html {
     font-size: 50%;
   }
-}
-@media (max-width: 700px) {
-  html {
-    font-size: 45%;
-  }
-  .slider_title {
-    font-size: 3rem;
-  }
   .home-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -39,6 +31,14 @@ body {
   }
   .profile-container {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  html {
+    font-size: 45%;
+  }
+  .slider_title {
+    font-size: 3rem;
   }
 }
 
