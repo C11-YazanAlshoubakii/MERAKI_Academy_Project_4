@@ -36,6 +36,7 @@ const UpdateService = ({ service, token, onUpdate }) => {
         <Form.Group className="mb-3">
           <Form.Label className="fs-3">Service Title</Form.Label>
           <Form.Control
+            className="fs-3"
             defaultValue={service.serviceTitle}
             onChange={(e) => {
               setTitle(e.target.value);
@@ -48,6 +49,7 @@ const UpdateService = ({ service, token, onUpdate }) => {
           <Form.Control
             as="textarea"
             rows={3}
+            className="fs-3"
             defaultValue={service.serviceDescription}
             onChange={(e) => {
               setDesc(e.target.value);
@@ -58,6 +60,7 @@ const UpdateService = ({ service, token, onUpdate }) => {
         <Form.Group className="mb-3">
           <Form.Label className="fs-3">Service Price</Form.Label>
           <Form.Control
+            className="fs-3"
             defaultValue={service.price}
             onChange={(e) => {
               setPrice(e.target.value);
