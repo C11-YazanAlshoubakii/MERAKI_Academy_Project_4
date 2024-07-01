@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://github.com/YazanAlshoubakii" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="/frontend/public/logo.png" alt="Project logo">
+ <img width="400px" height="400px" src="/frontend/public/logo.png" alt="Project logo">
  </a>
 </p>
 
