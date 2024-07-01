@@ -334,6 +334,7 @@ const Profile = () => {
       {/* Orders Modal */}
       <Modal
         show={showOrders}
+        className="fs-3"
         onHide={handelCloseOrders}
         size="lg"
         style={{ marginTop: '100px' }}
@@ -345,7 +346,11 @@ const Profile = () => {
           <Orders />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handelCloseOrders}>
+          <Button
+            variant="secondary"
+            className="fs-3"
+            onClick={handelCloseOrders}
+          >
             Close
           </Button>
         </Modal.Footer>
